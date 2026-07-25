@@ -10,17 +10,18 @@
     "happy-sql": "bin/happy-sql.js"
   },
   "imports": {
-    "#printer": "./lib/printer/printer.js",
-    "#printer/is": "./lib/printer/visitors/call-expression/is.js",
-    "#parser": "./lib/parser/parser.js",
-    "#parser/block": "./lib/parser/visitors/block/block.js",
-    "#parser/inline": "./lib/parser/visitors/inline/inline.js",
-    "#printer/test": "./test/create-printer-test.js",
-    "#parser/test": "./test/create-parser-test.js",
     "#happy-sql": "./lib/happy-sql.js",
-    "#create-string-literal": "./lib/parser/creators/create-string-literal.js",
-    "#indent": "./lib/parser/creators/indent.js",
-    "#dedent": "./lib/parser/creators/dedent.js"
+    "#parser": "./lib/parser/parser.js",
+    "#parser/test": "./test/create-parser-test.js",
+    "#parser/clause": "./lib/parser/visitors/clause/index.js",
+    "#parser/clause/select": "./lib/parser/visitors/clause/select/select.js",
+    "#parser/clause/from": "./lib/parser/visitors/clause/from/from.js",
+    "#parser/clause/where": "./lib/parser/visitors/clause/where/where.js",
+    "#parser/clause/insert": "./lib/parser/visitors/clause/insert/insert.js",
+    "#parser/clause/update": "./lib/parser/visitors/clause/update/update.js",
+    "#parser/clause/delete": "./lib/parser/visitors/clause/delete/delete.js",
+    "#printer": "./lib/printer/printer.js",
+    "#printer/test": "./test/create-printer-test.js"
   },
   "scripts": {
     "test": "madrun test",
@@ -75,10 +76,6 @@
     "@putout/operator-json": "^3.4.0",
     "@putout/printer": "^18.17.0",
     "redstd": "^1.0.2",
-    "remark-frontmatter": "^5.0.0",
-    "remark-gfm": "^4.0.1",
-    "remark-parse": "^11.0.0",
-    "sql-parser-cst": "^0.42.1",
-    "unified": "^11.0.5"
+    "sql-parser-cst": "^0.42.1"
   }
 }

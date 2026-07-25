@@ -1,0 +1,1 @@
+SELECT * FROM t WHERE num = 42

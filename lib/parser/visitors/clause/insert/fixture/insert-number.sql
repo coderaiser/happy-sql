@@ -1,0 +1,1 @@
+INSERT INTO t (x) VALUES (:x) ON CONFLICT (x, y) DO UPDATE SET count = 1

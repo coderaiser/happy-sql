@@ -7,37 +7,37 @@ import {
 import {convert} from './convert.js';
 
 test('happy-sql: bin: convert: js: [', (t) => {
-    const result = convert(`[heading(1, 'hello')]`);
+    const result = convert(`[select('*', from(users))]`);
     const expected = montag`
-        # hello\n
-    `;
+        SELECT *
+        FROM users
+    ` + '\n';
     
     t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: bin: convert: js: __putout_processor_markdown', (t) => {
-    const js = toJS(`[heading(1, 'hello')]`, __markdown_name);
+    const js = toJS(`[select('*', from(users))]`, __markdown_name);
     
     const result = convert(js);
     const expected = montag`
-        # hello\n
-    `;
+        SELECT *
+        FROM users
+    ` + '\n';
     
     t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: bin: convert: markdown: __putout_processor_markdown', (t) => {
-    const source = montag`
-        # hello\n
-    `;
+    const source = 'SELECT * FROM users';
     
     const result = convert(source);
     
     const expected = montag`
         [
-            heading(1, 'hello'),
+            select('*', from(users)),
         ];\n
     `;
     
