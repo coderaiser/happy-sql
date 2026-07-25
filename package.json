@@ -1,8 +1,8 @@
 {
   "name": "happy-sql",
-  "version": "1.7.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "markdown to js ast parser",
+  "description": "sql to js ast parser and printer",
   "exports": {
     ".": "./lib/happy-sql.js"
   },
