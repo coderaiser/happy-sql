@@ -228,3 +228,53 @@ test('happy-sql: printSql: multiple statements', (t) => {
     t.equal(result, 'SELECT *\nFROM users\nSELECT id\nFROM VariableDeclaration\n');
     t.end();
 });
+
+
+test('happy-sql: roundtrip: section', (t) => {
+    const source = '-- @select\nSELECT *\nFROM users\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: convertSqlToJs: section', (t) => {
+    const result = convertSqlToJs('-- @select\nSELECT * FROM users');
+    
+    const expected = montag`
+        [
+            section('@select', select('*', from(users))),
+        ];
+    ` +
+        '\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: section multi', (t) => {
+    const source = '-- @select\nSELECT *\nFROM users;\n-- @fix\nUPDATE users\nSET kind = \'let\'\nWHERE id = :id;\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = '-- @select\nSELECT *\nFROM users\n-- @fix\nUPDATE users\nSET kind = \'let\'\nWHERE id = :id\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: convertSqlToJs: section multi', (t) => {
+    const result = convertSqlToJs('-- @select\nSELECT * FROM users;\n-- @fix\nUPDATE users SET kind = \'let\' WHERE id = :id');
+    
+    const expected = montag`
+        [
+            section('@select', select('*', from(users))),
+            section('@fix', update(users, set(kind === 'let'), where(id === ':id'))),
+        ];
+    ` +
+        '\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
