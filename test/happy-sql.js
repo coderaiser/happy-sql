@@ -12,129 +12,171 @@ import {
 test('happy-sql: roundtrip: select star', (t) => {
     const source = 'SELECT *\nFROM users\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: select columns', (t) => {
     const source = 'SELECT id, start_line, start_col\nFROM VariableDeclaration\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: select alias', (t) => {
-    const source = "SELECT 'Prefer let over const' AS message, start_line AS line\nFROM VariableDeclaration\nWHERE file = :file\nAND kind = 'const'\n";
+    const source = `SELECT 'Prefer let over const' AS message, start_line AS line\nFROM VariableDeclaration\nWHERE file = :file\nAND kind = 'const'\n`;
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: where param', (t) => {
     const source = 'SELECT *\nFROM users\nWHERE id = :id\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: where and', (t) => {
-    const source = "SELECT *\nFROM users\nWHERE file = :file\nAND kind = 'const'\n";
+    const source = `SELECT *\nFROM users\nWHERE file = :file\nAND kind = 'const'\n`;
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: where or', (t) => {
-    const source = "SELECT *\nFROM users\nWHERE file = :file\nOR kind = 'const'\n";
+    const source = `SELECT *\nFROM users\nWHERE file = :file\nOR kind = 'const'\n`;
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: insert single', (t) => {
     const source = 'INSERT INTO t (x) VALUES (:x)\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: insert multi', (t) => {
     const source = 'INSERT INTO t (x, y) VALUES (:x, :y)\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: on conflict nothing', (t) => {
     const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT DO NOTHING\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: on conflict target nothing', (t) => {
     const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT (x) DO NOTHING\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: on conflict update', (t) => {
     const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT (x) DO UPDATE SET x = :x\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: update', (t) => {
-    const source = "UPDATE VariableDeclaration\nSET kind = 'let'\nWHERE file = :file\nAND kind = 'const'\n";
+    const source = `UPDATE VariableDeclaration\nSET kind = 'let'\nWHERE file = :file\nAND kind = 'const'\n`;
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: roundtrip: delete', (t) => {
     const source = 'DELETE FROM t\nWHERE id = :id\n';
     const ast = parseSqlNode(source);
-    t.equal(printSql(ast), source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: convertSqlToJs: select star', (t) => {
     const result = convertSqlToJs('SELECT * FROM users');
-
+    
     const expected = montag`
         [
             select('*', from(users)),
         ];
-    ` + '\n';
-
+    ` +
+        '\n';
+    
     t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: convertSqlToJs: where and', (t) => {
-    const result = convertSqlToJs("SELECT * FROM users WHERE file = :file AND kind = 'const'");
-
+    const result = convertSqlToJs(`SELECT * FROM users WHERE file = :file AND kind = 'const'`);
+    
     const expected = montag`
         [
             select('*', from(users), where(file === ':file' && kind === 'const')),
         ];
-    ` + '\n';
-
+    ` +
+        '\n';
+    
     t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: convertSqlToJs: insert on conflict', (t) => {
     const result = convertSqlToJs('INSERT INTO t (x) VALUES (:x) ON CONFLICT (x) DO UPDATE SET x = :x');
-
+    
     const expected = montag`
         [
             insert(into(t, x, values(':x')), onConflict(x, set(x === ':x'))),
         ];
-    ` + '\n';
-
+    ` +
+        '\n';
+    
     t.equal(result, expected);
     t.end();
 });
@@ -145,8 +187,11 @@ test('happy-sql: convertJsToSql: select', (t) => {
             select('*', from(users)),
         ];
     `;
-
-    t.equal(convertJsToSql(source), 'SELECT *\nFROM users\n');
+    
+    const result = convertJsToSql(source);
+    const expected = 'SELECT *\nFROM users\n';
+    
+    t.equal(result, expected);
     t.end();
 });
 
@@ -156,15 +201,16 @@ test('happy-sql: printSql: error on unknown', (t) => {
             types.callExpression(types.identifier('unknownClause'), []),
         ])),
     ]));
-
+    
     const [error] = tryCatch(printSql, ast);
-
+    
     t.match(error.message, 'not supported yet');
     t.end();
 });
+
 test('happy-sql: parseSqlNode: error on unknown statement type', (t) => {
     const [error] = tryCatch(parseSqlNode, 'CREATE TABLE t (x INT)');
-
+    
     t.match(error.message, 'not supported yet');
     t.end();
 });
@@ -176,10 +222,9 @@ test('happy-sql: printSql: multiple statements', (t) => {
             select(id, from(VariableDeclaration)),
         ];
     `;
-
+    
     const result = convertJsToSql(source);
+    
     t.equal(result, 'SELECT *\nFROM users\nSELECT id\nFROM VariableDeclaration\n');
     t.end();
 });
-
-

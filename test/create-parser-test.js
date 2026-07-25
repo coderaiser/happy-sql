@@ -7,13 +7,22 @@ const noop = () => {};
 const lint = (source) => {
     const code = convertSqlToJs(source);
     parse(code);
-    return {code, places: []};
+    
+    return {
+        code,
+        places: [],
+    };
 };
 
 export const createTest = (url, options) => createPutoutTest(url, {
     extension: 'sql',
     extensionFix: 'js',
     lint,
-    plugins: [['sql', {report: noop, replace: noop}]],
+    plugins: [
+        ['sql', {
+            report: noop,
+            replace: noop,
+        }],
+    ],
     ...options,
 });

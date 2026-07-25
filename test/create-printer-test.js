@@ -6,12 +6,21 @@ const noop = () => {};
 const lint = (source) => {
     const ast = parseSqlNode(source);
     const code = printSql(ast);
-    return {code, places: []};
+    
+    return {
+        code,
+        places: [],
+    };
 };
 
 export const createTest = (url, options) => createPutoutTest(url, {
     extension: 'sql',
     lint,
-    plugins: [['sql', {report: noop, replace: noop}]],
+    plugins: [
+        ['sql', {
+            report: noop,
+            replace: noop,
+        }],
+    ],
     ...options,
 });

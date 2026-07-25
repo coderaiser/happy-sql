@@ -11,7 +11,8 @@ test('happy-sql: bin: convert: js: [', (t) => {
     const expected = montag`
         SELECT *
         FROM users
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
@@ -24,7 +25,8 @@ test('happy-sql: bin: convert: js: __putout_processor_markdown', (t) => {
     const expected = montag`
         SELECT *
         FROM users
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
