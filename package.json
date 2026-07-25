@@ -78,6 +78,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
+    "sql-parser-cst": "^0.42.1",
     "unified": "^11.0.5"
   }
 }
