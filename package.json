@@ -12,8 +12,9 @@
   "imports": {
     "#happy-sql": "./lib/happy-sql.js",
     "#parser": "./lib/parser/parser.js",
-    "#parser/operand": "./lib/parser/operand.js",
-    "#parser/set": "./lib/parser/set.js",
+    "#parser/clause/operand": "./lib/parser/visitors/clause/operand.js",
+    "#parser/clause/set": "./lib/parser/visitors/clause/set.js",
+    "#parser/clause/find": "./lib/parser/visitors/clause/find-clause.js",
     "#parser/test": "./test/create-parser-test.js",
     "#parser/clause": "./lib/parser/visitors/clause/index.js",
     "#parser/clause/select": "./lib/parser/visitors/clause/select/select.js",
