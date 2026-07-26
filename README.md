@@ -9,7 +9,6 @@
 
 <img width="600" height="428" alt="image" src="https://github.com/user-attachments/assets/aefbd055-957e-4de3-aca5-c30e5e3ee3f9" />
 
-
 SQL to JS AST parser and printer.
 
 ## Install
@@ -17,8 +16,6 @@ SQL to JS AST parser and printer.
 ```
 npm i happy-sql --save
 ```
-
-
 
 ## License
 
