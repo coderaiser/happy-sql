@@ -45,9 +45,10 @@
     "url": "git+https://github.com/coderaiser/happy-sql.git"
   },
   "keywords": [
-    "store",
-    "variable",
-    "functional"
+    "sql",
+    "js",
+    "print",
+    "parse"
   ],
   "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
   "license": "MIT",
