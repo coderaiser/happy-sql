@@ -277,3 +277,14 @@ test('happy-sql: convertSqlToJs: section multi', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: printSql: count', (t) => {
+    const source = montag`
+        select(count('*'), from(users));
+    `;
+    
+    const result = convertJsToSql(source);
+    
+    t.equal(result, 'SELECT COUNT(*)\nFROM users\n');
+    t.end();
+});

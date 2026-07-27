@@ -18,6 +18,7 @@
     "#parser/test": "./test/create-parser-test.js",
     "#parser/clause": "./lib/parser/visitors/clause/index.js",
     "#parser/clause/select": "./lib/parser/visitors/clause/select/select.js",
+    "#parser/clause/count": "./lib/parser/visitors/clause/count/count.js",
     "#parser/clause/from": "./lib/parser/visitors/clause/from/from.js",
     "#parser/clause/where": "./lib/parser/visitors/clause/where/where.js",
     "#parser/clause/insert": "./lib/parser/visitors/clause/insert/insert.js",
@@ -79,6 +80,7 @@
     "@putout/babel": "^5.7.3",
     "@putout/operator-json": "^3.4.0",
     "@putout/printer": "^18.17.0",
+    "just-camel-case": "^6.2.0",
     "redstd": "^1.0.2",
     "sql-parser-cst": "^0.42.1"
   }

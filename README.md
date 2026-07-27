@@ -17,6 +17,17 @@ SQL to JS AST parser and printer.
 npm i happy-sql --save
 ```
 
+## API
+
+```js
+const source = `select(count('*'), from(users))`;
+
+convertJsToSql(source);
+// returns
+'SELECT COUNT(*)\nFROM users\n');
+
+```
+
 ## License
 
 MIT
