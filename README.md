@@ -24,8 +24,7 @@ const source = `select(count('*'), from(users))`;
 
 convertJsToSql(source);
 // returns
-'SELECT COUNT(*)\nFROM users\n');
-
+'SELECT COUNT(*)\nFROM users\n';
 ```
 
 ## License
