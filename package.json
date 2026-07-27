@@ -1,6 +1,6 @@
 {
   "name": "happy-sql",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "sql to js ast parser and printer",
   "exports": {
