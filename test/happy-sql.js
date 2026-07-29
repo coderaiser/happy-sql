@@ -230,7 +230,7 @@ test('happy-sql: printSql: multiple statements', (t) => {
 });
 
 test('happy-sql: roundtrip: section', (t) => {
-    const source = '-- @select\nSELECT *\nFROM users\n';
+    const source = '-- @select\nSELECT *\nFROM users;\n';
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;
@@ -257,7 +257,7 @@ test('happy-sql: roundtrip: section multi', (t) => {
     const source = `-- @select\nSELECT *\nFROM users;\n-- @fix\nUPDATE users\nSET kind = 'let'\nWHERE id = :id;\n`;
     const ast = parseSqlNode(source);
     const result = printSql(ast);
-    const expected = `-- @select\nSELECT *\nFROM users\n-- @fix\nUPDATE users\nSET kind = 'let'\nWHERE id = :id\n`;
+    const expected = `-- @select\nSELECT *\nFROM users;\n-- @fix\nUPDATE users\nSET kind = 'let'\nWHERE id = :id;\n`;
     
     t.equal(result, expected);
     t.end();

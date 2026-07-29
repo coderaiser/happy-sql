@@ -1,3 +1,3 @@
 -- @select
 SELECT *
-FROM users
+FROM users;
