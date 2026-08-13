@@ -355,3 +355,23 @@ test('happy-sql: convertSqlToJs: create table', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: last_insert_rowid', (t) => {
+    const source = 'SELECT last_insert_rowid()\nFROM users\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: lastval', (t) => {
+    const source = 'SELECT LASTVAL()\nFROM users\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
