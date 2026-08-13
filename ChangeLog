@@ -1,3 +1,12 @@
+2026.08.14, v1.4.0
+
+feature:
+- 1f764d9 extend support of sqlite and postgres
+- 3a39fbf with: improve
+- c7d966c with: add
+- bf17b06 parser/printer: RETURNING clause
+- d779866 parser/printer: multi-statement sections
+
 2026.07.29, v1.3.0
 
 feature:
