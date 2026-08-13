@@ -209,7 +209,7 @@ test('happy-sql: printSql: error on unknown', (t) => {
 });
 
 test('happy-sql: parseSqlNode: error on unknown statement type', (t) => {
-    const [error] = tryCatch(parseSqlNode, 'CREATE TABLE t (x INT)');
+    const [error] = tryCatch(parseSqlNode, 'DROP TABLE t');
     
     t.match(error.message, 'not supported yet');
     t.end();
@@ -286,5 +286,72 @@ test('happy-sql: printSql: count', (t) => {
     const result = convertJsToSql(source);
     
     t.equal(result, 'SELECT COUNT(*)\nFROM users\n');
+    t.end();
+});
+
+test('happy-sql: parseSqlNode: does not throw on last_insert_rowid', (t) => {
+    const [error] = tryCatch(parseSqlNode, 'SELECT last_insert_rowid() FROM users');
+    
+    t.notOk(error);
+    t.end();
+});
+
+test('happy-sql: parseSqlNode: does not throw on AUTOINCREMENT', (t) => {
+    const [error] = tryCatch(parseSqlNode, 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)');
+    
+    t.notOk(error);
+    t.end();
+});
+
+test('happy-sql: parseSqlNode: error when cannot parse in any dialect', (t) => {
+    const [error] = tryCatch(parseSqlNode, '>>>');
+    
+    t.equal(error.message, 'Cannot parse SQL');
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table autoincrement', (t) => {
+    const source = 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table with multiple columns', (t) => {
+    const source = 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table serial', (t) => {
+    const source = 'CREATE TABLE t (id SERIAL PRIMARY KEY)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: convertSqlToJs: create table', (t) => {
+    const result = convertSqlToJs('CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)');
+    
+    const expected = montag`
+        [
+            createTable(t, [
+                column(id, INTEGER, primaryKey(), autoIncrement()),
+            ]),
+        ];
+    ` +
+        '\n';
+    
+    t.equal(result, expected);
     t.end();
 });

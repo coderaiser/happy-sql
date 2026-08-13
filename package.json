@@ -25,6 +25,8 @@
     "#parser/clause/update": "./lib/parser/visitors/clause/update/update.js",
     "#parser/clause/delete": "./lib/parser/visitors/clause/delete/delete.js",
     "#parser/clause/with-named": "./lib/parser/visitors/clause/with-named/with-named.js",
+    "#parser/clause/create-table": "./lib/parser/visitors/clause/create-table/create-table.js",
+    "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
     "#printer": "./lib/printer/printer.js",
     "#printer/test": "./test/create-printer-test.js"
   },
@@ -74,8 +76,7 @@
     "putout": "^42.2.3",
     "redlint": "^6.9.2",
     "superc8": "^12.7.0",
-    "supertape": "^13.2.0",
-    "try-catch": "^4.0.9"
+    "supertape": "^13.2.0"
   },
   "dependencies": {
     "@putout/babel": "^5.7.3",
@@ -83,6 +84,7 @@
     "@putout/printer": "^18.17.0",
     "just-camel-case": "^6.2.0",
     "redstd": "^1.0.2",
-    "sql-parser-cst": "^0.42.1"
+    "sql-parser-cst": "^0.42.1",
+    "try-catch": "^4.0.9"
   }
 }

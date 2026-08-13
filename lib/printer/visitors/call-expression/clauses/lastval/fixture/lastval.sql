@@ -1,0 +1,2 @@
+SELECT LASTVAL()
+FROM users
