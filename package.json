@@ -24,6 +24,7 @@
     "#parser/clause/insert": "./lib/parser/visitors/clause/insert/insert.js",
     "#parser/clause/update": "./lib/parser/visitors/clause/update/update.js",
     "#parser/clause/delete": "./lib/parser/visitors/clause/delete/delete.js",
+    "#parser/clause/with-named": "./lib/parser/visitors/clause/with-named/with-named.js",
     "#printer": "./lib/printer/printer.js",
     "#printer/test": "./test/create-printer-test.js"
   },
