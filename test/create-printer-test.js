@@ -13,7 +13,8 @@ const lint = (source) => {
 };
 
 export const createTest = (url, options) => createPutoutTest(url, {
-    extension: 'sql',
+    extension: 'js',
+    extensionFix: 'sql',
     lint,
     plugins: [
         ['sql', {
