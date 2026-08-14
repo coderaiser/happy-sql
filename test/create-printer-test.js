@@ -1,9 +1,5 @@
 import {createTest as createPutoutTest} from '@putout/test';
-import {
-    convertJsToSql,
-    parseSqlNode,
-    printSql,
-} from '#happy-sql';
+import {convertJsToSql} from '#happy-sql';
 
 const noop = () => {};
 
