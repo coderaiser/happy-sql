@@ -1,2 +1,1 @@
-SELECT COUNT(1)
-FROM users
+select(count(1), from(users));

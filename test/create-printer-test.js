@@ -1,11 +1,14 @@
 import {createTest as createPutoutTest} from '@putout/test';
-import {parseSqlNode, printSql} from '#happy-sql';
+import {
+    convertJsToSql,
+    parseSqlNode,
+    printSql,
+} from '#happy-sql';
 
 const noop = () => {};
 
 const lint = (source) => {
-    const ast = parseSqlNode(source);
-    const code = printSql(ast);
+    const code = convertJsToSql(source);
     
     return {
         code,
