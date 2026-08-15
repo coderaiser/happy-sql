@@ -411,7 +411,7 @@ test('happy-sql: roundtrip: insert null', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (null)\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -421,7 +421,7 @@ test('happy-sql: roundtrip: insert true', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (true)\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -431,7 +431,7 @@ test('happy-sql: roundtrip: insert false', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (false)\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -441,7 +441,7 @@ test('happy-sql: roundtrip: select where true', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE active = true\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -451,7 +451,7 @@ test('happy-sql: roundtrip: select where false', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE active = false\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -461,7 +461,7 @@ test('happy-sql: roundtrip: select where param', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE name = :name\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
@@ -471,7 +471,7 @@ test('happy-sql: roundtrip: select where number', (t) => {
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE id = 42\n';
-
+    
     t.equal(result, expected);
     t.end();
 });
