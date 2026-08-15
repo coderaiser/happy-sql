@@ -445,3 +445,53 @@ test('happy-sql: roundtrip: select where number', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: from alias', (t) => {
+    const source = 'SELECT * FROM users AS u\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM users u\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: join on boolean', (t) => {
+    const source = 'SELECT * FROM a JOIN b ON a.x = TRUE\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM a\nJOIN b ON a.x = true\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: join on null', (t) => {
+    const source = 'SELECT * FROM a JOIN b ON a.x = NULL\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM a\nJOIN b ON a.x = null\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: join on identifier', (t) => {
+    const source = 'SELECT * FROM a JOIN b ON a = b\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM a\nJOIN b ON a = b\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: insert member expression', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (a.b)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (a.b)\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
