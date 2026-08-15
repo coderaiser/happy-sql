@@ -1,3 +1,14 @@
+2026.08.15, v1.6.0
+
+fix:
+- 92886e4 binary-expression: replace ?? with object map
+- fbe9fd9 lastval: print lowercase lastval()
+
+feature:
+- 07111c0 create sequence: add
+- a032611 create-sequence: add
+- e3d85bf create-sequence: add
+
 2026.08.15, v1.5.3
 
 feature:
