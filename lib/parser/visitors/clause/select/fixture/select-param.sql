@@ -1,0 +1,1 @@
+SELECT :arg_name, id FROM t

@@ -1,0 +1,1 @@
+SELECT bin.id FROM BinaryExpression bin JOIN Identifier arg_id ON arg_id.parent_id = bin.id AND arg_id.id != bin.id

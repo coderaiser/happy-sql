@@ -1,0 +1,1 @@
+SELECT u.id FROM t JOIN u ON u.id IN (1, 2, 3)
