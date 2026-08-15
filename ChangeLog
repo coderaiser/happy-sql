@@ -1,3 +1,11 @@
+2026.08.15, v1.5.0
+
+fix:
+- b8aff13 printer: test
+
+feature:
+- 465fc93 join: add support
+
 2026.08.14, v1.4.0
 
 feature:
