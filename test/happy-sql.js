@@ -375,3 +375,33 @@ test('happy-sql: roundtrip: lastval', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: insert null', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (NULL)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (null)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: insert true', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (TRUE)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (true)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: insert false', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (FALSE)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (false)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
