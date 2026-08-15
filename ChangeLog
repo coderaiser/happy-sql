@@ -1,3 +1,9 @@
+2026.08.15, v1.5.2
+
+feature:
+- 6a7d43a happy-sql: improve
+- f2f0f0e printer: array expression
+
 2026.08.15, v1.5.1
 
 feature:
