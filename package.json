@@ -1,5 +1,5 @@
 {
-    "name": "happy-sql",
+  "name": "happy-sql",
   "version": "1.5.2",
   "type": "module",
   "description": "sql to js ast parser and printer",
