@@ -1,2 +1,1 @@
 CREATE SEQUENCE users_id_seq
-
