@@ -367,7 +367,7 @@ test('happy-sql: roundtrip: last_insert_rowid', (t) => {
 });
 
 test('happy-sql: roundtrip: lastval', (t) => {
-    const source = 'SELECT LASTVAL()\nFROM users\n';
+    const source = 'SELECT lastval()\nFROM users\n';
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;

@@ -1,2 +1,2 @@
-SELECT LASTVAL()
+SELECT lastval()
 FROM users
