@@ -405,3 +405,73 @@ test('happy-sql: roundtrip: insert false', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: insert null', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (NULL)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (null)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: insert true', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (TRUE)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (true)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: insert false', (t) => {
+    const source = 'INSERT INTO t (x) VALUES (FALSE)\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'INSERT INTO t (x) VALUES (false)\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: select where true', (t) => {
+    const source = 'SELECT * FROM t WHERE active = TRUE\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM t\nWHERE active = true\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: select where false', (t) => {
+    const source = 'SELECT * FROM t WHERE active = FALSE\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM t\nWHERE active = false\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: select where param', (t) => {
+    const source = 'SELECT * FROM t WHERE name = :name\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM t\nWHERE name = :name\n';
+
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: select where number', (t) => {
+    const source = 'SELECT * FROM t WHERE id = 42\n';
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = 'SELECT *\nFROM t\nWHERE id = 42\n';
+
+    t.equal(result, expected);
+    t.end();
+});
