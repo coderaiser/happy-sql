@@ -376,6 +376,31 @@ test('happy-sql: roundtrip: lastval', (t) => {
     t.end();
 });
 
+test('happy-sql: convertSqlToJs: nextval', (t) => {
+    const result = convertSqlToJs(`CREATE TABLE users (id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY)`);
+    
+    t.match(result, 'nextval(users_id_seq)');
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table nextval', (t) => {
+    const source = `CREATE TABLE users (id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY, name TEXT)\n`;
+    const ast = parseSqlNode(source);
+    const result = printSql(ast);
+    const expected = source;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: convert nextval', (t) => {
+    const source = `CREATE TABLE users (id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY, name TEXT)\n`;
+    const result = convertJsToSql(convertSqlToJs(source));
+    
+    t.equal(result, source);
+    t.end();
+});
+
 test('happy-sql: roundtrip: insert null', (t) => {
     const source = 'INSERT INTO t (x) VALUES (NULL)\n';
     const ast = parseSqlNode(source);
