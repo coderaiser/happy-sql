@@ -70,7 +70,7 @@ test('happy-sql: roundtrip: where or', (t) => {
 });
 
 test('happy-sql: roundtrip: insert single', (t) => {
-    const source = 'INSERT INTO t (x) VALUES (:x)\n';
+    const source = "INSERT INTO t (x) VALUES (':x')\n";
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;
@@ -80,7 +80,7 @@ test('happy-sql: roundtrip: insert single', (t) => {
 });
 
 test('happy-sql: roundtrip: insert multi', (t) => {
-    const source = 'INSERT INTO t (x, y) VALUES (:x, :y)\n';
+    const source = "INSERT INTO t (x, y) VALUES (':x', ':y')\n";
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;
@@ -90,7 +90,7 @@ test('happy-sql: roundtrip: insert multi', (t) => {
 });
 
 test('happy-sql: roundtrip: on conflict nothing', (t) => {
-    const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT DO NOTHING\n';
+    const source = "INSERT INTO t (x) VALUES (':x') ON CONFLICT DO NOTHING\n";
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;
@@ -100,7 +100,7 @@ test('happy-sql: roundtrip: on conflict nothing', (t) => {
 });
 
 test('happy-sql: roundtrip: on conflict target nothing', (t) => {
-    const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT (x) DO NOTHING\n';
+    const source = "INSERT INTO t (x) VALUES (':x') ON CONFLICT (x) DO NOTHING\n";
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;
@@ -110,7 +110,7 @@ test('happy-sql: roundtrip: on conflict target nothing', (t) => {
 });
 
 test('happy-sql: roundtrip: on conflict update', (t) => {
-    const source = 'INSERT INTO t (x) VALUES (:x) ON CONFLICT (x) DO UPDATE SET x = :x\n';
+    const source = "INSERT INTO t (x) VALUES (':x') ON CONFLICT (x) DO UPDATE SET x = :x\n";
     const ast = parseSqlNode(source);
     const result = printSql(ast);
     const expected = source;

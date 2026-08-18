@@ -1,6 +1,6 @@
 WITH
     call AS (
-        INSERT INTO CallExpression (parent_id) VALUES (:parent_id) RETURNING id
+        INSERT INTO CallExpression (parent_id) VALUES (':parent_id') RETURNING id
     ),
     member AS (
         INSERT INTO MemberExpression (parent_id) SELECT id
