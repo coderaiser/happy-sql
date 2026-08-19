@@ -6,7 +6,11 @@ const noop = () => {};
 
 const lint = (source) => {
     const code = convertSqlToJs(source);
-    parse(code);
+    parse(code, {
+        plugins: [
+            ['typescript'],
+        ],
+    });
     
     return {
         code,
