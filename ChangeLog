@@ -1,3 +1,8 @@
+2026.08.19, v2.0.0
+
+feature:
+- f34faef happy-sql: parseSqlNode -> parseSql
+
 2026.08.19, v1.7.1
 
 fix:
