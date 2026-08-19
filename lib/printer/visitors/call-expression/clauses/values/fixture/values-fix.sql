@@ -1,1 +1,1 @@
-VALUES (':x')
+VALUES (:x)

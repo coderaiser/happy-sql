@@ -1,1 +1,1 @@
-VALUES (':file', ':parent_id')
+VALUES (:file, :parent_id)

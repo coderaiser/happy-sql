@@ -1,1 +1,1 @@
-INSERT INTO t (x) VALUES (':x') ON CONFLICT (x, y) DO UPDATE SET x = :x
+INSERT INTO t (x) VALUES (:x) ON CONFLICT (x, y) DO UPDATE SET x = :x
