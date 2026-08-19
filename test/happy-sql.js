@@ -485,27 +485,36 @@ test('happy-sql: roundtrip: from alias', (t) => {
 test('happy-sql: round-trip: FROM alias', (t) => {
     const sql = 'SELECT bin.id FROM BinaryExpression AS bin';
     const expected = 'SELECT bin.id\nFROM BinaryExpression AS bin\n';
-    t.equal(convertJsToSql(convertSqlToJs(sql)), expected);
+    const result = convertJsToSql(convertSqlToJs(sql));
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: round-trip: JOIN alias', (t) => {
     const sql = 'SELECT bin.id FROM BinaryExpression AS bin JOIN Identifier AS nan_id ON nan_id.parent_id = bin.id';
     const expected = 'SELECT bin.id\nFROM BinaryExpression AS bin\nJOIN Identifier AS nan_id ON nan_id.parent_id = bin.id\n';
-    t.equal(convertJsToSql(convertSqlToJs(sql)), expected);
+    const result = convertJsToSql(convertSqlToJs(sql));
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: round-trip: SELECT alias', (t) => {
     const sql = 'SELECT id AS call_id FROM users';
     const expected = 'SELECT id AS call_id\nFROM users\n';
-    t.equal(convertJsToSql(convertSqlToJs(sql)), expected);
+    const result = convertJsToSql(convertSqlToJs(sql));
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('happy-sql: round-trip: RETURNING alias', (t) => {
     const sql = 'INSERT INTO CallExpression (parent_id) VALUES (:parent_id) RETURNING id AS call_id';
-    t.equal(convertJsToSql(convertSqlToJs(sql)), sql + '\n');
+    const result = convertJsToSql(convertSqlToJs(sql));
+    const expected = `${sql}\n`;
+    
+    t.equal(result, expected);
     t.end();
 });
 
