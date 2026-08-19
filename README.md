@@ -29,7 +29,6 @@ echo "SELECT * FROM users WHERE id = :id" | happy-sql
 # [
 #     select('*', from(users), where(id === ':id')),
 # ];
-
 # JS → SQL (pipe the output back)
 echo "[\n    select('*', from(users), where(id === ':id')),\n];" | happy-sql
 # SELECT *
@@ -51,7 +50,7 @@ import {
 ### `convertSqlToJs(sql)`
 
 ```js
-convertSqlToJs("SELECT COUNT(*)\nFROM users\n");
+convertSqlToJs('SELECT COUNT(*)\nFROM users\n');
 // [
 //     select(count('*'), from(users)),
 // ];
@@ -60,7 +59,7 @@ convertSqlToJs("SELECT COUNT(*)\nFROM users\n");
 ### `convertJsToSql(js)`
 
 ```js
-convertJsToSql("select(count('*'), from(users))");
+convertJsToSql('select(count(\'*\'), from(users))');
 // "SELECT COUNT(*)\nFROM users\n"
 ```
 
