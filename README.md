@@ -1,4 +1,4 @@
-# Happy SQL [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+# Happy Sql [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 
 [NPMURL]: https://npmjs.org/package/happy-sql "npm"
 [NPMIMGURL]: https://img.shields.io/npm/v/happy-sql.svg?style=flat
@@ -11,7 +11,7 @@
 
 Write SQL as JavaScript function calls: parse, print, convert.
 
-SQL written as JS lives in `.js` files it gets linted, formatted, and transformed by standard tooling. **Happy SQL** is the engine that converts between the two representations and exposes the underlying AST for tools that need it.
+SQL written as JS lives in `.js` files it gets linted, formatted, and transformed by standard tooling. **Happy Sql** is the engine that converts between the two representations and exposes the underlying AST for tools that need it.
 
 ## Install
 
