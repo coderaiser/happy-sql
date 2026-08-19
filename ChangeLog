@@ -1,3 +1,8 @@
+2026.08.19, v2.0.1
+
+fix:
+- c1629b0 happy-sql: keep :x unquoted
+
 2026.08.19, v2.0.0
 
 feature:
