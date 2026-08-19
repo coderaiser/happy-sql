@@ -1,3 +1,8 @@
+2026.08.19, v1.7.1
+
+fix:
+- 269dea4 happy-sql: values printer: preserve string param quotes
+
 2026.08.18, v1.7.0
 
 feature:
