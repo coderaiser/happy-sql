@@ -42,7 +42,7 @@ echo "[\n    select('*', from(users), where(id === ':id')),\n];" | happy-sql
 import {
     convertSqlToJs,
     convertJsToSql,
-    parseSqlNode,
+    parseSql,
     printSql,
 } from 'happy-sql';
 ```
@@ -63,7 +63,7 @@ convertJsToSql('select(count(\'*\'), from(users))');
 // "SELECT COUNT(*)\nFROM users\n"
 ```
 
-### `parseSqlNode(sql)`
+### `parseSql(sql)`
 
 Returns a Babel-compatible AST node. Use when you need to inspect or transform the tree directly.
 

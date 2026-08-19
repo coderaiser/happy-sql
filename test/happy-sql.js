@@ -3,7 +3,7 @@ import {montag} from 'montag';
 import {tryCatch} from 'try-catch';
 import {types} from '@putout/babel';
 import {
-    parseSqlNode,
+    parseSql,
     printSql,
     convertSqlToJs,
     convertJsToSql,
@@ -11,7 +11,7 @@ import {
 
 test('happy-sql: roundtrip: select star', (t) => {
     const source = 'SELECT *\nFROM users\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -21,7 +21,7 @@ test('happy-sql: roundtrip: select star', (t) => {
 
 test('happy-sql: roundtrip: select columns', (t) => {
     const source = 'SELECT id, start_line, start_col\nFROM VariableDeclaration\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -31,7 +31,7 @@ test('happy-sql: roundtrip: select columns', (t) => {
 
 test('happy-sql: roundtrip: select alias', (t) => {
     const source = `SELECT 'Prefer let over const' AS message, start_line AS line\nFROM VariableDeclaration\nWHERE file = :file\nAND kind = 'const'\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -41,7 +41,7 @@ test('happy-sql: roundtrip: select alias', (t) => {
 
 test('happy-sql: roundtrip: where param', (t) => {
     const source = 'SELECT *\nFROM users\nWHERE id = :id\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -51,7 +51,7 @@ test('happy-sql: roundtrip: where param', (t) => {
 
 test('happy-sql: roundtrip: where and', (t) => {
     const source = `SELECT *\nFROM users\nWHERE file = :file\nAND kind = 'const'\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -61,7 +61,7 @@ test('happy-sql: roundtrip: where and', (t) => {
 
 test('happy-sql: roundtrip: where or', (t) => {
     const source = `SELECT *\nFROM users\nWHERE file = :file\nOR kind = 'const'\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -71,7 +71,7 @@ test('happy-sql: roundtrip: where or', (t) => {
 
 test('happy-sql: roundtrip: insert single', (t) => {
     const source = `INSERT INTO t (x) VALUES (':x')\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -81,7 +81,7 @@ test('happy-sql: roundtrip: insert single', (t) => {
 
 test('happy-sql: roundtrip: insert multi', (t) => {
     const source = `INSERT INTO t (x, y) VALUES (':x', ':y')\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -91,7 +91,7 @@ test('happy-sql: roundtrip: insert multi', (t) => {
 
 test('happy-sql: roundtrip: on conflict nothing', (t) => {
     const source = `INSERT INTO t (x) VALUES (':x') ON CONFLICT DO NOTHING\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -101,7 +101,7 @@ test('happy-sql: roundtrip: on conflict nothing', (t) => {
 
 test('happy-sql: roundtrip: on conflict target nothing', (t) => {
     const source = `INSERT INTO t (x) VALUES (':x') ON CONFLICT (x) DO NOTHING\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -111,7 +111,7 @@ test('happy-sql: roundtrip: on conflict target nothing', (t) => {
 
 test('happy-sql: roundtrip: on conflict update', (t) => {
     const source = `INSERT INTO t (x) VALUES (':x') ON CONFLICT (x) DO UPDATE SET x = :x\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -121,7 +121,7 @@ test('happy-sql: roundtrip: on conflict update', (t) => {
 
 test('happy-sql: roundtrip: update', (t) => {
     const source = `UPDATE VariableDeclaration\nSET kind = 'let'\nWHERE file = :file\nAND kind = 'const'\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -131,7 +131,7 @@ test('happy-sql: roundtrip: update', (t) => {
 
 test('happy-sql: roundtrip: delete', (t) => {
     const source = 'DELETE FROM t\nWHERE id = :id\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -208,8 +208,8 @@ test('happy-sql: printSql: error on unknown', (t) => {
     t.end();
 });
 
-test('happy-sql: parseSqlNode: error on unknown statement type', (t) => {
-    const [error] = tryCatch(parseSqlNode, 'DROP TABLE t');
+test('happy-sql: parseSql: error on unknown statement type', (t) => {
+    const [error] = tryCatch(parseSql, 'DROP TABLE t');
     
     t.match(error.message, 'not supported yet');
     t.end();
@@ -231,7 +231,7 @@ test('happy-sql: printSql: multiple statements', (t) => {
 
 test('happy-sql: roundtrip: section', (t) => {
     const source = '-- @select\nSELECT *\nFROM users;\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -255,7 +255,7 @@ test('happy-sql: convertSqlToJs: section', (t) => {
 
 test('happy-sql: roundtrip: section multi', (t) => {
     const source = `-- @select\nSELECT *\nFROM users;\n-- @fix\nUPDATE users\nSET kind = 'let'\nWHERE id = :id;\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = `-- @select\nSELECT *\nFROM users;;\n-- @fix\nUPDATE users\nSET kind = 'let'\nWHERE id = :id;\n`;
     
@@ -289,22 +289,22 @@ test('happy-sql: printSql: count', (t) => {
     t.end();
 });
 
-test('happy-sql: parseSqlNode: does not throw on last_insert_rowid', (t) => {
-    const [error] = tryCatch(parseSqlNode, 'SELECT last_insert_rowid() FROM users');
+test('happy-sql: parseSql: does not throw on last_insert_rowid', (t) => {
+    const [error] = tryCatch(parseSql, 'SELECT last_insert_rowid() FROM users');
     
     t.notOk(error);
     t.end();
 });
 
-test('happy-sql: parseSqlNode: does not throw on AUTOINCREMENT', (t) => {
-    const [error] = tryCatch(parseSqlNode, 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)');
+test('happy-sql: parseSql: does not throw on AUTOINCREMENT', (t) => {
+    const [error] = tryCatch(parseSql, 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)');
     
     t.notOk(error);
     t.end();
 });
 
-test('happy-sql: parseSqlNode: error when cannot parse in any dialect', (t) => {
-    const [error] = tryCatch(parseSqlNode, '>>>');
+test('happy-sql: parseSql: error when cannot parse in any dialect', (t) => {
+    const [error] = tryCatch(parseSql, '>>>');
     
     t.equal(error.message, 'Cannot parse SQL');
     t.end();
@@ -312,7 +312,7 @@ test('happy-sql: parseSqlNode: error when cannot parse in any dialect', (t) => {
 
 test('happy-sql: roundtrip: create table autoincrement', (t) => {
     const source = 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -322,7 +322,7 @@ test('happy-sql: roundtrip: create table autoincrement', (t) => {
 
 test('happy-sql: roundtrip: create table with multiple columns', (t) => {
     const source = 'CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -332,7 +332,7 @@ test('happy-sql: roundtrip: create table with multiple columns', (t) => {
 
 test('happy-sql: roundtrip: create table serial', (t) => {
     const source = 'CREATE TABLE t (id SERIAL PRIMARY KEY)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -358,7 +358,7 @@ test('happy-sql: convertSqlToJs: create table', (t) => {
 
 test('happy-sql: roundtrip: last_insert_rowid', (t) => {
     const source = 'SELECT last_insert_rowid()\nFROM users\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -368,7 +368,7 @@ test('happy-sql: roundtrip: last_insert_rowid', (t) => {
 
 test('happy-sql: roundtrip: lastval', (t) => {
     const source = 'SELECT lastval()\nFROM users\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -385,7 +385,7 @@ test('happy-sql: convertSqlToJs: nextval', (t) => {
 
 test('happy-sql: roundtrip: create table nextval', (t) => {
     const source = `CREATE TABLE users (id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY, name TEXT)\n`;
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
     
@@ -403,7 +403,7 @@ test('happy-sql: roundtrip: convert nextval', (t) => {
 
 test('happy-sql: roundtrip: insert null', (t) => {
     const source = 'INSERT INTO t (x) VALUES (NULL)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (null)\n';
     
@@ -413,7 +413,7 @@ test('happy-sql: roundtrip: insert null', (t) => {
 
 test('happy-sql: roundtrip: insert true', (t) => {
     const source = 'INSERT INTO t (x) VALUES (TRUE)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (true)\n';
     
@@ -423,7 +423,7 @@ test('happy-sql: roundtrip: insert true', (t) => {
 
 test('happy-sql: roundtrip: insert false', (t) => {
     const source = 'INSERT INTO t (x) VALUES (FALSE)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (false)\n';
     
@@ -433,7 +433,7 @@ test('happy-sql: roundtrip: insert false', (t) => {
 
 test('happy-sql: roundtrip: select where true', (t) => {
     const source = 'SELECT * FROM t WHERE active = TRUE\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE active = true\n';
     
@@ -443,7 +443,7 @@ test('happy-sql: roundtrip: select where true', (t) => {
 
 test('happy-sql: roundtrip: select where false', (t) => {
     const source = 'SELECT * FROM t WHERE active = FALSE\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE active = false\n';
     
@@ -453,7 +453,7 @@ test('happy-sql: roundtrip: select where false', (t) => {
 
 test('happy-sql: roundtrip: select where param', (t) => {
     const source = 'SELECT * FROM t WHERE name = :name\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE name = :name\n';
     
@@ -463,7 +463,7 @@ test('happy-sql: roundtrip: select where param', (t) => {
 
 test('happy-sql: roundtrip: select where number', (t) => {
     const source = 'SELECT * FROM t WHERE id = 42\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM t\nWHERE id = 42\n';
     
@@ -473,7 +473,7 @@ test('happy-sql: roundtrip: select where number', (t) => {
 
 test('happy-sql: roundtrip: from alias', (t) => {
     const source = 'SELECT * FROM users AS u\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM users u\n';
     
@@ -483,7 +483,7 @@ test('happy-sql: roundtrip: from alias', (t) => {
 
 test('happy-sql: roundtrip: join on boolean', (t) => {
     const source = 'SELECT * FROM a JOIN b ON a.x = TRUE\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM a\nJOIN b ON a.x = true\n';
     
@@ -493,7 +493,7 @@ test('happy-sql: roundtrip: join on boolean', (t) => {
 
 test('happy-sql: roundtrip: join on null', (t) => {
     const source = 'SELECT * FROM a JOIN b ON a.x = NULL\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM a\nJOIN b ON a.x = null\n';
     
@@ -503,7 +503,7 @@ test('happy-sql: roundtrip: join on null', (t) => {
 
 test('happy-sql: roundtrip: join on identifier', (t) => {
     const source = 'SELECT * FROM a JOIN b ON a = b\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'SELECT *\nFROM a\nJOIN b ON a = b\n';
     
@@ -513,7 +513,7 @@ test('happy-sql: roundtrip: join on identifier', (t) => {
 
 test('happy-sql: roundtrip: insert member expression', (t) => {
     const source = 'INSERT INTO t (x) VALUES (a.b)\n';
-    const ast = parseSqlNode(source);
+    const ast = parseSql(source);
     const result = printSql(ast);
     const expected = 'INSERT INTO t (x) VALUES (a.b)\n';
     
