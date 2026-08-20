@@ -169,7 +169,7 @@ WHERE parent_id = :parent_id`;
 test('happy-sql: roundtrip: section', (t) => {
     const source = `-- @select
 SELECT *
-FROM users`;
+FROM users;`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
@@ -191,10 +191,10 @@ SELECT 'test' AS message\n`;
     
     const expected = `-- @select
 SELECT *
-FROM users
+FROM users;
 
 -- @report
-SELECT 'test' AS message\n`;
+SELECT 'test' AS message;\n`;
     
     t.equal(result, expected);
     t.end();
