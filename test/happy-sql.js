@@ -7,7 +7,7 @@ FROM users`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -19,7 +19,7 @@ FROM users`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -31,7 +31,7 @@ FROM VariableDeclaration`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -44,7 +44,7 @@ WHERE id = :id`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -58,7 +58,7 @@ AND kind = 'const'`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -86,7 +86,7 @@ test('happy-sql: roundtrip: insert single', (t) => {
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -97,7 +97,7 @@ test('happy-sql: roundtrip: insert multi', (t) => {
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -109,7 +109,7 @@ ON CONFLICT DO NOTHING`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -121,7 +121,7 @@ ON CONFLICT (parent_id) DO NOTHING`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -148,7 +148,7 @@ WHERE parent_id = :parent_id`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -160,7 +160,7 @@ WHERE parent_id = :parent_id`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -173,7 +173,7 @@ FROM users`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -206,7 +206,7 @@ id SERIAL PRIMARY KEY)`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -219,7 +219,7 @@ name TEXT)`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -231,7 +231,7 @@ id SERIAL)`;
     
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -241,7 +241,7 @@ test('happy-sql: roundtrip: last_insert_rowid', (t) => {
     const source = 'SELECT last_insert_rowid()';
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
@@ -251,7 +251,7 @@ test('happy-sql: roundtrip: lastval', (t) => {
     const source = 'SELECT lastval()';
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source + '\n';
+    const expected = `${source}\n`;
     
     t.equal(result, expected);
     t.end();
