@@ -1,3 +1,1 @@
-SELECT *
-FROM t
-WHERE x LIKE :pattern
+SELECT *, FROM t, WHERE x LIKE :pattern

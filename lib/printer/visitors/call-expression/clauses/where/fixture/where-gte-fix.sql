@@ -1,3 +1,1 @@
-SELECT *
-FROM t
-WHERE x >= 1
+SELECT *, FROM t, WHERE x >= 1

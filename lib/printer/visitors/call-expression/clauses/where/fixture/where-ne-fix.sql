@@ -1,3 +1,1 @@
-SELECT *
-FROM t
-WHERE x != :y
+SELECT *, FROM t, WHERE x != :y

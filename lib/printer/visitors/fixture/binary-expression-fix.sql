@@ -1,3 +1,1 @@
-SELECT *
-FROM t
-WHERE x % 2
+SELECT *, FROM t, WHERE x % 2
