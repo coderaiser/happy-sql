@@ -1,8 +1,9 @@
 import {parseSql, printSql} from 'happy-sql';
+import {test} from 'supertape';
 
 test('happy-sql: roundtrip: select star', (t) => {
-    const source = 'SELECT *
-FROM users';
+    const source = `SELECT *
+FROM users`;
     const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
@@ -11,8 +12,8 @@ FROM users';
 });
 
 test('happy-sql: roundtrip: select columns', (t) => {
-    const source = 'SELECT id, name
-FROM users';
+    const source = `SELECT id, name
+FROM users`;
     const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
@@ -31,13 +32,12 @@ FROM VariableDeclaration`;
 });
 
 test('happy-sql: roundtrip: where param', (t) => {
-    const source = 'SELECT *
+    const source = `SELECT *
 FROM users
-WHERE id = :id';
+WHERE id = :id`;
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = 'SELECT *
-FROM users';
+    const expected = source;
     t.equal(result, expected);
     t.end();
 });
@@ -49,8 +49,7 @@ WHERE file = :file
 AND kind = 'const'`;
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = `SELECT *
-FROM users`;
+    const expected = source;
     t.equal(result, expected);
     t.end();
 });
@@ -62,7 +61,9 @@ WHERE x = ':x' OR y = ':y'`;
     const ast = parseSql(source);
     const result = printSql(ast);
     const expected = `SELECT *
-FROM users`;
+FROM users
+WHERE x = :x
+OR y = :y`;
     t.equal(result, expected);
     t.end();
 });
@@ -100,7 +101,8 @@ ON CONFLICT DO NOTHING`;
 
 test('happy-sql: roundtrip: on conflict target nothing', (t) => {
     const source = `INSERT INTO CallExpression (parent_id)
-ON CONFLICT DO NOTHING`;
+VALUES (:parent_id)
+ON CONFLICT (parent_id) DO NOTHING`;
     const ast = parseSql(source);
     const result = printSql(ast);
     const expected = source;
@@ -111,10 +113,12 @@ ON CONFLICT DO NOTHING`;
 test('happy-sql: roundtrip: on conflict update', (t) => {
     const source = `INSERT INTO CallExpression (parent_id)
 VALUES (:parent_id)
-ON CONFLICT UPDATE parent_type = :parent_type`;
+ON CONFLICT (parent_id) DO UPDATE SET parent_type = ':parent_type'`;
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source;
+    const expected = `INSERT INTO CallExpression (parent_id)
+VALUES (:parent_id)
+ON CONFLICT (parent_id) DO UPDATE SET parent_type = :parent_type`;
     t.equal(result, expected);
     t.end();
 });
@@ -154,13 +158,17 @@ FROM users`;
 test('happy-sql: roundtrip: section multi', (t) => {
     const source = `-- @select
 SELECT *
-FROM users
-
+FROM users;
 -- @report
 SELECT 'test' AS message`;
     const ast = parseSql(source);
     const result = printSql(ast);
-    const expected = source;
+    const expected = `-- @select
+SELECT *
+FROM users
+
+-- @report
+SELECT 'test' AS message`;
     t.equal(result, expected);
     t.end();
 });
