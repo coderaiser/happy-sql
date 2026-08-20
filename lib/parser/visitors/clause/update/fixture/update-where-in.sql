@@ -1,0 +1,1 @@
+UPDATE t SET x = 1 WHERE y IN (1, 2, 3)
