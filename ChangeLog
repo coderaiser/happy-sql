@@ -1,3 +1,8 @@
+2026.08.20, v2.0.7
+
+fix:
+- 0ddbb26 happy-sql: parser: improve error message
+
 2026.08.20, v2.0.6
 
 feature:
