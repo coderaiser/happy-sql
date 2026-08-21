@@ -39,7 +39,12 @@ test('happy-sql: bin: convert: markdown: __putout_processor_markdown', (t) => {
     
     const expected = montag`
         [
-            select('*', from(users)),
+            select(
+                '*',
+                from(
+                    users
+                )
+            ),
         ];\n
     `;
     
