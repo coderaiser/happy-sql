@@ -11,7 +11,6 @@
   },
   "imports": {
     "#happy-sql": "./lib/happy-sql.js",
-    "#js-printer": "./lib/js-printer/printer.js",
     "#parser": "./lib/parser/parser.js",
     "#parser/clause/operand": "./lib/parser/visitors/clause/operand.js",
     "#parser/clause/set": "./lib/parser/visitors/clause/set.js",
