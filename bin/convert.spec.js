@@ -42,8 +42,8 @@ test('happy-sql: bin: convert: markdown: __putout_processor_markdown', (t) => {
             select(
                 '*',
                 from(
-                    users
-                )
+                    users,
+                ),
             ),
         ];\n
     `;
