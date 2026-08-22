@@ -1,6 +1,11 @@
-import {parseSql, printSql} from 'happy-sql';
 import {test} from 'supertape';
 import {montag} from 'montag';
+import {
+    convertJsToSql,
+    convertSqlToJs,
+    parseSql,
+    printSql,
+} from 'happy-sql';
 
 test('happy-sql: roundtrip: select star', (t) => {
     const source = montag`
@@ -529,6 +534,15 @@ test('happy-sql: roundtrip: full groupBy query', (t) => {
     const ast = parseSql(source);
     const result = printSql(ast);
     const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: generate_series', (t) => {
+    const sql = 'SELECT *\nFROM generate_series(1, 10, 2)';
+    const result = convertJsToSql(convertSqlToJs(sql));
+    const expected = `${sql}\n`;
     
     t.equal(result, expected);
     t.end();
