@@ -393,3 +393,49 @@ test('happy-sql: roundtrip: groupBy sum having', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: orderBy', (t) => {
+    const source = montag`
+        SELECT id
+        FROM users
+        ORDER BY name
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: orderBy desc', (t) => {
+    const source = montag`
+        SELECT id
+        FROM users
+        ORDER BY name DESC
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: groupBy orderBy', (t) => {
+    const source = montag`
+        SELECT dept, COUNT(*)
+        FROM emp
+        GROUP BY dept
+        ORDER BY dept
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
