@@ -636,3 +636,20 @@ test('happy-sql: roundtrip: where in subquery', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where exists', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE EXISTS (SELECT 1
+        FROM u
+        WHERE u.id = t.id)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
