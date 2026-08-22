@@ -591,3 +591,17 @@ test('happy-sql: roundtrip: coalesce', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: returning star', (t) => {
+    const source = montag`
+        INSERT INTO t (name) VALUES ('test')
+        RETURNING *
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

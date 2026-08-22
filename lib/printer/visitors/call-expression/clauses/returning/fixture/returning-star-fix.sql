@@ -1,0 +1,2 @@
+INSERT INTO t (name) VALUES ('test')
+RETURNING *
