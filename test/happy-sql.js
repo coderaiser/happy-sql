@@ -484,3 +484,18 @@ test('happy-sql: roundtrip: distinct', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where not in', (t) => {
+    const source = montag`
+        SELECT *
+        FROM users
+        WHERE id NOT IN (1, 2, 3)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
