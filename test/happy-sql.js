@@ -377,3 +377,19 @@ test('happy-sql: roundtrip: groupBy having', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: groupBy sum having', (t) => {
+    const source = montag`
+        SELECT dept, SUM(salary)
+        FROM emp
+        GROUP BY dept
+        HAVING SUM(salary) > 1000
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
