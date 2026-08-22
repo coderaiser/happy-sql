@@ -1,0 +1,1 @@
+SELECT * FROM (SELECT id FROM t) sub

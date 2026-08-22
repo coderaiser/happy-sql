@@ -605,3 +605,18 @@ test('happy-sql: roundtrip: returning star', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: subquery in from', (t) => {
+    const source = montag`
+        SELECT *
+        FROM (SELECT id
+        FROM t) AS sub
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
