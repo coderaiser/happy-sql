@@ -1,3 +1,8 @@
+2026.08.22, v2.1.0
+
+feature:
+- 533076c parser: WITH RECURSIVE: add
+
 2026.08.21, v2.0.8
 
 fix:
