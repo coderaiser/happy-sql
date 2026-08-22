@@ -577,3 +577,17 @@ test('happy-sql: roundtrip: inner join', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: coalesce', (t) => {
+    const source = montag`
+        SELECT COALESCE(name, id)
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

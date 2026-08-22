@@ -1,0 +1,1 @@
+SELECT COALESCE(name, id) FROM t
