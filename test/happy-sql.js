@@ -377,4 +377,3 @@ test('happy-sql: roundtrip: groupBy having', (t) => {
     t.equal(result, expected);
     t.end();
 });
-
