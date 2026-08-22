@@ -29,6 +29,7 @@
     "#parser/clause/create-table": "./lib/parser/visitors/clause/create-table/create-table.js",
     "#parser/clause/create-sequence": "./lib/parser/visitors/clause/create-sequence/create-sequence.js",
     "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
+    "#parser/clause/case-when": "./lib/parser/visitors/clause/case-when/case-when.js",
     "#printer": "./lib/printer/printer.js",
     "#printer/test": "./test/create-printer-test.js"
   },

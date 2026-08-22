@@ -667,3 +667,17 @@ test('happy-sql: roundtrip: cast', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: case when', (t) => {
+    const source = montag`
+        SELECT CASE WHEN kind = 'const' THEN 1 WHEN kind = 'let' THEN 2 ELSE 0 END
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

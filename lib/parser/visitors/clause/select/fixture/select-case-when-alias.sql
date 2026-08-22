@@ -1,0 +1,1 @@
+SELECT CASE WHEN kind = 'const' THEN 1 ELSE 0 END AS flag FROM t
