@@ -303,3 +303,78 @@ test('happy-sql: roundtrip: lastval', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: withNamed select', (t) => {
+    const source = montag`
+        WITH
+            recent AS (
+                SELECT id
+                FROM users
+                WHERE kind = 'const'
+            )
+        SELECT id
+        FROM recent
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: withRecursive', (t) => {
+    const source = montag`
+        WITH RECURSIVE
+            numbers(value) AS (
+                SELECT 1
+                UNION ALL
+                SELECT value + 1
+                FROM numbers
+                WHERE value < 10
+            )
+        SELECT value
+        FROM numbers
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: unionAll', (t) => {
+    const source = montag`
+        SELECT 1
+        UNION ALL
+        SELECT 2
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: groupBy having', (t) => {
+    const source = montag`
+        SELECT kind, COUNT(*)
+        FROM VariableDeclaration
+        WHERE kind = 'const'
+        GROUP BY kind
+        HAVING COUNT(*) > 1
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+

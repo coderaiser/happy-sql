@@ -1,0 +1,8 @@
+WITH RECURSIVE
+    t AS (
+        SELECT 1
+        UNION ALL
+        SELECT 2
+    )
+SELECT *
+FROM t
