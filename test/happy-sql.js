@@ -470,3 +470,17 @@ test('happy-sql: roundtrip: limit offset', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: distinct', (t) => {
+    const source = montag`
+        SELECT DISTINCT name
+        FROM users
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
