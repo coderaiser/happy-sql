@@ -499,3 +499,37 @@ test('happy-sql: roundtrip: where not in', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where between', (t) => {
+    const source = montag`
+        SELECT *
+        FROM users
+        WHERE age BETWEEN 18 AND 65
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: full groupBy query', (t) => {
+    const source = montag`
+        SELECT dept, SUM(salary)
+        FROM emp
+        WHERE dept != 'intern'
+        GROUP BY dept
+        HAVING SUM(salary) > 1000
+        ORDER BY dept
+        LIMIT 10
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
