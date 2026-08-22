@@ -653,3 +653,17 @@ test('happy-sql: roundtrip: where exists', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: cast', (t) => {
+    const source = montag`
+        SELECT CAST(id AS TEXT)
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

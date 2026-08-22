@@ -1,0 +1,2 @@
+SELECT CAST(id AS TEXT)
+FROM t
