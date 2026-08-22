@@ -547,3 +547,33 @@ test('happy-sql: round-trip: generate_series', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: left join', (t) => {
+    const source = montag`
+        SELECT *
+        FROM users
+        LEFT JOIN orders ON users.id = orders.user_id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: inner join', (t) => {
+    const source = montag`
+        SELECT *
+        FROM users
+        INNER JOIN orders ON users.id = orders.user_id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
