@@ -1,0 +1,3 @@
+SELECT id
+FROM users
+LIMIT 10

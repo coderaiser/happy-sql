@@ -439,3 +439,34 @@ test('happy-sql: roundtrip: groupBy orderBy', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: limit', (t) => {
+    const source = montag`
+        SELECT id
+        FROM users
+        LIMIT 10
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: limit offset', (t) => {
+    const source = montag`
+        SELECT id
+        FROM users
+        LIMIT 10
+        OFFSET 5
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
