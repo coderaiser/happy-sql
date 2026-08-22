@@ -1,3 +1,15 @@
+2026.08.22, v2.1.1
+
+feature:
+- e2feb52 happy-sql: ctx -> printer
+- 515f571 happy-sql: generate_series — table-valued function in FROM
+- 39f51e3 parser/printer: where: between: add + test: happy-sql: roundtrip: full groupBy integration test
+- 6a22942 parser/printer: where: not-in: add
+- c1461ac parser/printer: distinct: add
+- 8885f47 parser/printer: limit, offset: add
+- 48f567c parser/printer: order-by: add
+- 33a852e parser/printer: aggregate functions: sum, avg, min, max, count(col)
+
 2026.08.22, v2.1.0
 
 feature:
