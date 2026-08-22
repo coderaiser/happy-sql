@@ -620,3 +620,19 @@ test('happy-sql: roundtrip: subquery in from', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where in subquery', (t) => {
+    const source = montag`
+        SELECT id
+        FROM t
+        WHERE id IN (SELECT user_id
+        FROM orders)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
