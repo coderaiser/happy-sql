@@ -1063,3 +1063,21 @@ test('happy-sql: roundtrip: attach database', (t) => {
     t.equal(result, `${source}\n`);
     t.end();
 });
+
+const jsonRoundTripCases = [
+    ["arrow", "SELECT data -> 'name'\nFROM users"],
+    ["double-arrow", "SELECT data ->> 'name'\nFROM users"],
+    ["has-key", "SELECT *\nFROM users\nWHERE data ? 'email'"],
+    ["contains", "SELECT *\nFROM users\nWHERE data @> '{\"name\":\"x\"}'"],
+    ["has-any-key", "SELECT *\nFROM users\nWHERE data ?| ARRAY['email', 'name']"],
+];
+
+for (const [name, sql] of jsonRoundTripCases)
+    test(`happy-sql: round-trip: json operators: ${name}`, (t) => {
+        const result = convertJsToSql(convertSqlToJs(sql));
+        
+        const expected = `${sql}\n`;
+        
+        t.equal(result, expected);
+        t.end();
+    });
