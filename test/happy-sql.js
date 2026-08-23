@@ -1098,3 +1098,17 @@ test('happy-sql: roundtrip: union distinct', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: window over', (t) => {
+    const source = montag`
+        SELECT id, ROW_NUMBER() OVER (PARTITION BY kind ORDER BY id)
+        FROM users
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
