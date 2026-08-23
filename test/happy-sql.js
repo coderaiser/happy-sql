@@ -1065,11 +1065,11 @@ test('happy-sql: roundtrip: attach database', (t) => {
 });
 
 const jsonRoundTripCases = [
-    ["arrow", "SELECT data -> 'name'\nFROM users"],
-    ["double-arrow", "SELECT data ->> 'name'\nFROM users"],
-    ["has-key", "SELECT *\nFROM users\nWHERE data ? 'email'"],
-    ["contains", "SELECT *\nFROM users\nWHERE data @> '{\"name\":\"x\"}'"],
-    ["has-any-key", "SELECT *\nFROM users\nWHERE data ?| ARRAY['email', 'name']"],
+    ['arrow', `SELECT data -> 'name'\nFROM users`],
+    ['double-arrow', `SELECT data ->> 'name'\nFROM users`],
+    ['has-key', `SELECT *\nFROM users\nWHERE data ? 'email'`],
+    ['contains', `SELECT *\nFROM users\nWHERE data @> '{"name":"x"}'`],
+    ['has-any-key', `SELECT *\nFROM users\nWHERE data ?| ARRAY['email', 'name']`],
 ];
 
 for (const [name, sql] of jsonRoundTripCases)
