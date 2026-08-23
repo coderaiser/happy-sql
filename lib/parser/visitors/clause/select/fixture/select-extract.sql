@@ -1,0 +1,1 @@
+SELECT EXTRACT(YEAR FROM created_at) FROM t

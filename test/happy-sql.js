@@ -886,3 +886,17 @@ test('happy-sql: roundtrip: select table star', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: extract', (t) => {
+    const source = montag`
+        SELECT EXTRACT(YEAR FROM created_at)
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
