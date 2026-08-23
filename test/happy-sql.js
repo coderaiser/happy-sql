@@ -844,3 +844,31 @@ test('happy-sql: roundtrip: drop table if exists', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: select null', (t) => {
+    const source = montag`
+        SELECT NULL
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: select bool', (t) => {
+    const source = montag`
+        SELECT TRUE, FALSE
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
