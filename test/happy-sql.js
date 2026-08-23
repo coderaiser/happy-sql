@@ -872,3 +872,17 @@ test('happy-sql: roundtrip: select bool', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: select table star', (t) => {
+    const source = montag`
+        SELECT u.*
+        FROM users AS u
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
