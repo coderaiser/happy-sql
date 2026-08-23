@@ -942,3 +942,59 @@ test('happy-sql: roundtrip: string concat', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: alter table add column', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        ADD COLUMN y INT
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: alter table drop column', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        DROP COLUMN name
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: alter table rename column', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        RENAME COLUMN old_name TO new_name
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: alter table alter column type', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        ALTER COLUMN x TYPE TEXT
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

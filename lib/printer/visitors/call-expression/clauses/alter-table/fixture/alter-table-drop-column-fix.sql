@@ -1,0 +1,2 @@
+ALTER TABLE t
+DROP COLUMN name

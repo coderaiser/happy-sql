@@ -30,6 +30,7 @@
     "#parser/clause/union": "./lib/parser/visitors/clause/union/union.js",
     "#parser/clause/create-table": "./lib/parser/visitors/clause/create-table/create-table.js",
     "#parser/clause/create-sequence": "./lib/parser/visitors/clause/create-sequence/create-sequence.js",
+    "#parser/clause/alter-table": "./lib/parser/visitors/clause/alter-table/alter-table.js",
     "#parser/clause/drop-table": "./lib/parser/visitors/clause/drop-table/drop-table.js",
     "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
     "#parser/clause/case-when": "./lib/parser/visitors/clause/case-when/case-when.js",
