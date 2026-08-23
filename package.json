@@ -23,6 +23,7 @@
     "#parser/clause/from": "./lib/parser/visitors/clause/from/from.js",
     "#parser/clause/where": "./lib/parser/visitors/clause/where/where.js",
     "#parser/clause/insert": "./lib/parser/visitors/clause/insert/insert.js",
+    "#parser/clause/returning": "./lib/parser/visitors/clause/returning.js",
     "#parser/clause/update": "./lib/parser/visitors/clause/update/update.js",
     "#parser/clause/delete": "./lib/parser/visitors/clause/delete/delete.js",
     "#parser/clause/with-named": "./lib/parser/visitors/clause/with-named/with-named.js",

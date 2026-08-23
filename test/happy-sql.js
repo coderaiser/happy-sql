@@ -786,3 +786,19 @@ test('happy-sql: roundtrip: where not between', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: update from', (t) => {
+    const source = montag`
+        UPDATE t
+        SET x = 1
+        FROM u
+        WHERE t.id = u.id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
