@@ -1038,3 +1038,11 @@ test('happy-sql: roundtrip: rollback to savepoint', (t) => {
     t.equal(result, 'ROLLBACK TO SAVEPOINT sp1\n');
     t.end();
 });
+
+test('happy-sql: roundtrip: drop index', (t) => {
+    const ast = parseSql('DROP INDEX idx');
+    const result = printSql(ast);
+    
+    t.equal(result, 'DROP INDEX idx\n');
+    t.end();
+});

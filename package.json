@@ -33,6 +33,7 @@
     "#parser/clause/alter-table": "./lib/parser/visitors/clause/alter-table/alter-table.js",
     "#parser/clause/drop-table": "./lib/parser/visitors/clause/drop-table/drop-table.js",
     "#parser/clause/transaction": "./lib/parser/visitors/clause/transaction/transaction.js",
+    "#parser/clause/drop-index": "./lib/parser/visitors/clause/drop-index/drop-index.js",
     "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
     "#parser/clause/case-when": "./lib/parser/visitors/clause/case-when/case-when.js",
     "#printer": "./lib/printer/printer.js",
