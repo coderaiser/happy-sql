@@ -681,3 +681,18 @@ test('happy-sql: roundtrip: case when', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: full outer join', (t) => {
+    const source = montag`
+        SELECT *
+        FROM a
+        FULL OUTER JOIN b ON a.id = b.id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
