@@ -1046,3 +1046,11 @@ test('happy-sql: roundtrip: drop index', (t) => {
     t.equal(result, 'DROP INDEX idx\n');
     t.end();
 });
+
+test('happy-sql: roundtrip: pragma table_info', (t) => {
+    const ast = parseSql('PRAGMA table_info(users)');
+    const result = printSql(ast);
+    
+    t.equal(result, 'PRAGMA table_info(users)\n');
+    t.end();
+});
