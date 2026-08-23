@@ -14,6 +14,7 @@
     "#parser": "./lib/parser/parser.js",
     "#parser/clause/operand": "./lib/parser/visitors/clause/operand.js",
     "#parser/clause/set": "./lib/parser/visitors/clause/set.js",
+    "#parser/clause/binary": "./lib/parser/visitors/clause/binary.js",
     "#parser/clause/find": "./lib/parser/visitors/clause/find-clause.js",
     "#parser/test": "./test/create-parser-test.js",
     "#parser/clause": "./lib/parser/visitors/clause/index.js",
