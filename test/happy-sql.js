@@ -1054,3 +1054,12 @@ test('happy-sql: roundtrip: pragma table_info', (t) => {
     t.equal(result, 'PRAGMA table_info(users)\n');
     t.end();
 });
+
+test('happy-sql: roundtrip: attach database', (t) => {
+    const source = `ATTACH DATABASE 'file.db' AS other`;
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, `${source}\n`);
+    t.end();
+});

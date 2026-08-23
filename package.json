@@ -35,6 +35,7 @@
     "#parser/clause/transaction": "./lib/parser/visitors/clause/transaction/transaction.js",
     "#parser/clause/drop-index": "./lib/parser/visitors/clause/drop-index/drop-index.js",
     "#parser/clause/pragma": "./lib/parser/visitors/clause/pragma/pragma.js",
+    "#parser/clause/attach": "./lib/parser/visitors/clause/attach/attach.js",
     "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
     "#parser/clause/case-when": "./lib/parser/visitors/clause/case-when/case-when.js",
     "#printer": "./lib/printer/printer.js",
