@@ -1,1 +1,1 @@
-PARTITION BY kind
+PARTITION BY kind, name
