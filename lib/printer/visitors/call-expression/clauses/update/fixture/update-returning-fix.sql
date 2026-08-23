@@ -1,0 +1,4 @@
+UPDATE t
+SET x = 1
+WHERE id = 1
+RETURNING id

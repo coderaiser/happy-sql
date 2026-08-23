@@ -802,3 +802,19 @@ test('happy-sql: roundtrip: update from', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: update returning', (t) => {
+    const source = montag`
+        UPDATE t
+        SET x = 1
+        WHERE id = 1
+        RETURNING id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
