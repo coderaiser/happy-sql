@@ -696,3 +696,18 @@ test('happy-sql: roundtrip: full outer join', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: natural join', (t) => {
+    const source = montag`
+        SELECT *
+        FROM a
+        NATURAL JOIN b
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
