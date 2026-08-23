@@ -998,3 +998,43 @@ test('happy-sql: roundtrip: alter table alter column type', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: begin', (t) => {
+    const ast = parseSql('BEGIN');
+    const result = printSql(ast);
+    
+    t.equal(result, 'BEGIN\n');
+    t.end();
+});
+
+test('happy-sql: roundtrip: commit', (t) => {
+    const ast = parseSql('COMMIT');
+    const result = printSql(ast);
+    
+    t.equal(result, 'COMMIT\n');
+    t.end();
+});
+
+test('happy-sql: roundtrip: rollback', (t) => {
+    const ast = parseSql('ROLLBACK');
+    const result = printSql(ast);
+    
+    t.equal(result, 'ROLLBACK\n');
+    t.end();
+});
+
+test('happy-sql: roundtrip: savepoint', (t) => {
+    const ast = parseSql('SAVEPOINT sp1');
+    const result = printSql(ast);
+    
+    t.equal(result, 'SAVEPOINT sp1\n');
+    t.end();
+});
+
+test('happy-sql: roundtrip: rollback to savepoint', (t) => {
+    const ast = parseSql('ROLLBACK TO SAVEPOINT sp1');
+    const result = printSql(ast);
+    
+    t.equal(result, 'ROLLBACK TO SAVEPOINT sp1\n');
+    t.end();
+});
