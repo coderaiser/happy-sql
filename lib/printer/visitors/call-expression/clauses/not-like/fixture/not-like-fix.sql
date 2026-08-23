@@ -1,0 +1,3 @@
+SELECT *
+FROM t
+WHERE name NOT LIKE '%x%'

@@ -1,0 +1,3 @@
+SELECT *
+FROM t
+WHERE name SIMILAR TO '%foo%'

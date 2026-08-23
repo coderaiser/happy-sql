@@ -711,3 +711,63 @@ test('happy-sql: roundtrip: natural join', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where not like', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE name NOT LIKE '%x%'
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: where ilike', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE name ILIKE '%foo%'
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: where similar to', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE name SIMILAR TO '%foo%'
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: where is distinct from', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE a IS DISTINCT FROM b
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
