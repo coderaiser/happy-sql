@@ -771,3 +771,18 @@ test('happy-sql: roundtrip: where is distinct from', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where not between', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE x NOT BETWEEN 1 AND 10
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
