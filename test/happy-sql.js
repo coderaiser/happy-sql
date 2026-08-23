@@ -1081,3 +1081,20 @@ for (const [name, sql] of jsonRoundTripCases)
         t.equal(result, expected);
         t.end();
     });
+
+test('happy-sql: roundtrip: union distinct', (t) => {
+    const source = montag`
+        SELECT id
+        FROM a
+        UNION
+        SELECT id
+        FROM b
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
