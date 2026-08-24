@@ -1320,3 +1320,37 @@ test('happy-sql: roundtrip: create table if not exists', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: intersect', (t) => {
+    const source = montag`
+        SELECT id
+        FROM a
+        INTERSECT
+        SELECT id
+        FROM b
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: except', (t) => {
+    const source = montag`
+        SELECT id
+        FROM a
+        EXCEPT
+        SELECT id
+        FROM b
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
