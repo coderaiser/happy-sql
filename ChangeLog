@@ -1,3 +1,8 @@
+2026.08.24, v2.2.1
+
+fix:
+- c1535ff npmignore: fixture: exclude
+
 2026.08.24, v2.2.0
 
 fix:
