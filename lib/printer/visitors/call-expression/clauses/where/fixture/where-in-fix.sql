@@ -1,1 +1,3 @@
-SELECT *, FROM t, WHERE x IN (1, 2, 3)
+SELECT *
+FROM t
+WHERE x IN (1, 2, 3)

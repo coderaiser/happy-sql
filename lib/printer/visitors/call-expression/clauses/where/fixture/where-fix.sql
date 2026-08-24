@@ -1,1 +1,3 @@
-SELECT *, FROM users, WHERE id = :id
+SELECT *
+FROM users
+WHERE id = :id
