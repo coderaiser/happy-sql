@@ -1172,3 +1172,17 @@ test('happy-sql: roundtrip: where all subquery', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: select array literal', (t) => {
+    const source = montag`
+        SELECT ARRAY['a', 'b']
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
