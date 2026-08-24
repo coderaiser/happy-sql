@@ -1127,3 +1127,17 @@ test('happy-sql: roundtrip: where and with nested or parens', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
+    const source = montag`
+        SELECT data @> '{}'::jsonb
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
