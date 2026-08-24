@@ -1,0 +1,1 @@
+SELECT * FROM t WHERE id > ALL(1, 2)
