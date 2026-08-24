@@ -1,0 +1,1 @@
+SELECT * FROM t, LATERAL (SELECT 1) sub
