@@ -1,0 +1,1 @@
+SELECT * FROM t WHERE id = ANY(ARRAY[1, 2, 3])

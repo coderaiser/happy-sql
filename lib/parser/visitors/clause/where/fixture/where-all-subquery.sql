@@ -1,0 +1,1 @@
+SELECT * FROM t WHERE id > ALL(SELECT id FROM u)

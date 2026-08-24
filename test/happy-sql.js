@@ -1141,3 +1141,34 @@ test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: where any', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE id = ANY(ARRAY[1, 2, 3])
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: where all subquery', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t
+        WHERE id > ALL(SELECT id
+        FROM u)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
