@@ -1220,3 +1220,16 @@ test('happy-sql: roundtrip: create index', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: insert multi-row values', (t) => {
+    const source = montag`
+        INSERT INTO t (id) VALUES (1), (2), (3)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
