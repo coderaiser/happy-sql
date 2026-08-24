@@ -1,0 +1,1 @@
+SELECT LAG(x) OVER (ORDER BY id) FROM t
