@@ -1,5 +1,16 @@
 2026.08.24, v2.3.0
 
+fix:
+- 219bd9b happy-sql: parser: REPLACE INTO
+- 91b29e2 happy-sql: parser: intersect and except
+- 198b65b npmignore: fixture: exclude
+
+feature:
+- 9236576 happy-sql: printer: replaceInto
+- 7f333dc happy-sql: printer: intersect and except
+
+2026.08.24, v2.3.0
+
 feature:
 - 7f333dc printer: intersect and except
 - 9236576 printer: replaceInto
