@@ -1233,3 +1233,87 @@ test('happy-sql: roundtrip: insert multi-row values', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create table not null', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        id INT NOT NULL)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table default', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        id INT DEFAULT 0)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table unique', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        x INT UNIQUE)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table check', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        x INT CHECK (x > 0))
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table references', (t) => {
+    const source = montag`
+        CREATE TABLE orders (
+        user_id INT REFERENCES users(id))
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create table if not exists', (t) => {
+    const source = montag`
+        CREATE TABLE IF NOT EXISTS t (
+        id INT)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

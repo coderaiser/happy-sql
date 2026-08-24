@@ -1,0 +1,1 @@
+CREATE TABLE t (x INT CHECK (x > 0))

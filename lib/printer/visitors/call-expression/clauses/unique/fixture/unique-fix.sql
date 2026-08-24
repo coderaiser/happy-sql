@@ -1,0 +1,1 @@
+x INT UNIQUE
