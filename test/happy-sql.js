@@ -1354,3 +1354,16 @@ test('happy-sql: roundtrip: except', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: replace into', (t) => {
+    const source = montag`
+        REPLACE INTO t (id, name) VALUES (1, 'x')
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
