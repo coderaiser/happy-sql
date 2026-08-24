@@ -1143,3 +1143,18 @@ test('happy-sql: roundtrip: where nested parens', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: delete returning', (t) => {
+    const source = montag`
+        DELETE FROM t
+        WHERE id = 1
+        RETURNING id
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

@@ -1,0 +1,3 @@
+DELETE FROM t
+WHERE id = 1
+RETURNING id
