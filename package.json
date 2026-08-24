@@ -29,6 +29,7 @@
     "#parser/clause/with-named": "./lib/parser/visitors/clause/with-named/with-named.js",
     "#parser/clause/union": "./lib/parser/visitors/clause/union/union.js",
     "#parser/clause/create-table": "./lib/parser/visitors/clause/create-table/create-table.js",
+    "#parser/clause/create-index": "./lib/parser/visitors/clause/create-index/create-index.js",
     "#parser/clause/create-sequence": "./lib/parser/visitors/clause/create-sequence/create-sequence.js",
     "#parser/clause/alter-table": "./lib/parser/visitors/clause/alter-table/alter-table.js",
     "#parser/clause/drop-table": "./lib/parser/visitors/clause/drop-table/drop-table.js",
