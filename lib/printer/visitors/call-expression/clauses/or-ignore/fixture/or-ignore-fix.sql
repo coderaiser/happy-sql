@@ -1,0 +1,2 @@
+INSERT OR IGNORE
+INTO t (id) VALUES (1)

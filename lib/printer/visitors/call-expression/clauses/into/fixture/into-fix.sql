@@ -1,1 +1,1 @@
-INSERT INTO t (x) VALUES (:x)
+INTO t (x) VALUES (:x)

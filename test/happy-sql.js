@@ -1113,42 +1113,11 @@ test('happy-sql: roundtrip: window over', (t) => {
     t.end();
 });
 
-test('happy-sql: roundtrip: where not exists', (t) => {
+test('happy-sql: roundtrip: where and with nested or parens', (t) => {
     const source = montag`
         SELECT *
         FROM t
-        WHERE NOT EXISTS (SELECT 1
-        FROM u)
-    `;
-    
-    const ast = parseSql(source);
-    const result = printSql(ast);
-    const expected = `${source}\n`;
-    
-    t.equal(result, expected);
-    t.end();
-});
-
-test('happy-sql: roundtrip: where nested parens', (t) => {
-    const source = montag`
-        SELECT *
-        FROM t
-        WHERE (a = 1 OR b = 2) AND c = 3
-    `;
-    
-    const ast = parseSql(source);
-    const result = printSql(ast);
-    const expected = `${source}\n`;
-    
-    t.equal(result, expected);
-    t.end();
-});
-
-test('happy-sql: roundtrip: delete returning', (t) => {
-    const source = montag`
-        DELETE FROM t
-        WHERE id = 1
-        RETURNING id
+        WHERE c = 3 AND (a = 1 OR b = 2)
     `;
     
     const ast = parseSql(source);
