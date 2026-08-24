@@ -1186,3 +1186,37 @@ test('happy-sql: roundtrip: select array literal', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: lateral join', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t, LATERAL (SELECT 1) AS sub
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: vacuum', (t) => {
+    const result = printSql(parseSql('VACUUM'));
+    
+    t.equal(result, 'VACUUM\n');
+    t.end();
+});
+
+test('happy-sql: roundtrip: create index', (t) => {
+    const source = montag`
+        CREATE INDEX idx ON t (name)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
