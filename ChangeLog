@@ -1,3 +1,59 @@
+2026.08.24, v2.2.0
+
+fix:
+- d0a98eb column-definition: NOT NULL, DEFAULT, UNIQUE, CHECK, REFERENCES; CREATE TABLE IF NOT EXISTS
+- 8db3673 insert: multi-row VALUES support
+- 24afa16 index: wire create_index_stmt and vacuum_stmt to clauseVisitors
+- 4cdca5c from: LATERAL join support
+- b87b5ab select: ARRAY literal expression in column list
+- e803804 operand: ANY and ALL quantifier expressions
+- e5ca74f operand: handle PostgreSQL :: cast operator (cast_operator_expr)
+- 6f26e0c printer: CallExpression: into
+- 7325059 printer: queries
+- 9c12f1a printer: queries
+- d82705d where: NOT EXISTS, paren_expr in nested conditions
+- 719b4e3 happy-sql: parser+printer: UNION distinct vs UNION ALL
+- c8b4354 alter-table: support ADD COLUMN, DROP COLUMN, RENAME COLUMN, ALTER COLUMN TYPE
+- 9d052b4 binary: JSONB ->, ->>, and || string concat operators
+- 8d8205e binary: JSONB ->, ->>, and || string concat operators
+- f5ab342 select: support EXTRACT(unit FROM col)
+- 016d2ed select: support table.* (member_expr with all_columns)
+- 6a7510d select: support NULL and TRUE/FALSE literals
+- ea56135 drop-table: support multiple tables
+- 1a05cfd update: support RETURNING clause
+- c3e8b45 update: support FROM clause
+- 81c9875 where: not-between: detect betweenKw array, emit notBetween()
+- 267f929 binary: NOT LIKE, ILIKE, SIMILAR TO, IS DISTINCT FROM: add to OP_CONVERTERS
+- d52c89c from: support NATURAL JOIN
+- c595d7e from: support FULL OUTER JOIN
+- 7287f91 select: support CASE WHEN
+- 69e2c88 select: support CAST(x AS TYPE)
+- e112e67 where: support EXISTS
+- 324625b where: support IN (subquery)
+- 4922056 from: support subquery in FROM
+- b980624 returning: handle RETURNING *
+- a7b7b53 select: func-call: pass args to generic functions
+- 601c165 from: preserve LEFT/INNER/RIGHT/LEFT OUTER JOIN type
+
+feature:
+- 624c378 VACUUM
+- be90105 create index: add
+- 06be326 happy-sql: parser+printer: WINDOW ... OVER (PARTITION BY, ORDER BY)
+- bb3762d happy-sql: parser+printer: array literal ARRAY[...]
+- 34ab6f1 happy-sql: parser+printer: JSON/JSONB operators as array tuples
+- c1b121a attach: SQLite ATTACH DATABASE: parser + printer
+- 823912c pragma: SQLite PRAGMA statement: parser + printer
+- eadebe8 drop-index: parser + printer
+- 847adae transaction: BEGIN, COMMIT, ROLLBACK, SAVEPOINT, ROLLBACK TO SAVEPOINT
+- e2feb52 happy-sql: ctx -> printer
+- 515f571 happy-sql: generate_series — table-valued function in FROM
+- 39f51e3 parser/printer: where: between: add + test: happy-sql: roundtrip: full groupBy integration test
+- 6a22942 parser/printer: where: not-in: add
+- c1461ac parser/printer: distinct: add
+- 8885f47 parser/printer: limit, offset: add
+- 48f567c parser/printer: order-by: add
+- 33a852e parser/printer: aggregate functions: sum, avg, min, max, count(col)
+
 2026.08.23, v2.2.0
 
 feature:
