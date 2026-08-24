@@ -1,3 +1,18 @@
+2026.08.24, v2.3.0
+
+feature:
+- 7f333dc printer: intersect and except
+- 9236576 printer: replaceInto
+
+fix:
+- 91b29e2 parser: intersect and except
+- 219bd9b parser: REPLACE INTO
+
+test:
+- fb2a0bc bin/convert coverage, 100% coverage
+- 498e25f round-trip: intersect, except
+- 720c219 round-trip: REPLACE INTO
+
 2026.08.24, v2.2.1
 
 fix:
