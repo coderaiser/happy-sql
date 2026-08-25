@@ -1642,3 +1642,31 @@ test('happy-sql: roundtrip: show param', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create view', (t) => {
+    const source = montag`
+        CREATE VIEW v AS SELECT *
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create materialized view', (t) => {
+    const source = montag`
+        CREATE MATERIALIZED VIEW mv AS SELECT *
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
