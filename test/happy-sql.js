@@ -1616,3 +1616,29 @@ test('happy-sql: roundtrip: explain analyze', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: set param', (t) => {
+    const source = montag`
+        SET search_path TO myschema
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: show param', (t) => {
+    const source = montag`
+        SHOW search_path
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
