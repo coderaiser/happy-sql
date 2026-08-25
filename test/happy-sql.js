@@ -314,12 +314,9 @@ test('happy-sql: roundtrip: lastval', (t) => {
 
 test('happy-sql: roundtrip: withNamed select', (t) => {
     const source = montag`
-        WITH
-            recent AS (
-                SELECT id
-                FROM users
-                WHERE kind = 'const'
-            )
+        WITH recent AS (SELECT id
+        FROM users
+        WHERE kind = 'const')
         SELECT id
         FROM recent
     `;
@@ -1471,6 +1468,22 @@ test('happy-sql: roundtrip: except', (t) => {
 test('happy-sql: roundtrip: replace into', (t) => {
     const source = montag`
         REPLACE INTO t (id, name) VALUES (1, 'x')
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: with cte', (t) => {
+    const source = montag`
+        WITH cte AS (SELECT id
+        FROM u)
+        SELECT *
+        FROM cte
     `;
     
     const ast = parseSql(source);
