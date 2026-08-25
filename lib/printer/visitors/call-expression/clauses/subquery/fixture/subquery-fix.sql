@@ -1,3 +1,3 @@
 SELECT *
 FROM (SELECT id
-FROM t) AS sub
+FROM t) sub

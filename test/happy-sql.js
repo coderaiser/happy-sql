@@ -613,7 +613,7 @@ test('happy-sql: roundtrip: subquery in from', (t) => {
     const source = montag`
         SELECT *
         FROM (SELECT id
-        FROM t) AS sub
+        FROM t) sub
     `;
     
     const ast = parseSql(source);
@@ -1290,7 +1290,7 @@ test('happy-sql: roundtrip: select array literal', (t) => {
 test('happy-sql: roundtrip: lateral join', (t) => {
     const source = montag`
         SELECT *
-        FROM t, LATERAL (SELECT 1) AS sub
+        FROM t, LATERAL (SELECT 1) sub
     `;
     
     const ast = parseSql(source);
