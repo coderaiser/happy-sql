@@ -40,7 +40,14 @@
     "#parser/clause/column-definition": "./lib/parser/visitors/clause/column-definition/column-definition.js",
     "#parser/clause/case-when": "./lib/parser/visitors/clause/case-when/case-when.js",
     "#printer": "./lib/printer/printer.js",
-    "#printer/test": "./test/create-printer-test.js"
+    "#printer/test": "./test/create-printer-test.js",
+    "#parser/clause/explain": "./lib/parser/visitors/clause/explain/explain.js",
+    "#parser/clause/set-param": "./lib/parser/visitors/clause/set-param/set-param.js",
+    "#parser/clause/create-view": "./lib/parser/visitors/clause/create-view/create-view.js",
+    "#parser/clause/drop-view": "./lib/parser/visitors/clause/drop-view/drop-view.js",
+    "#parser/clause/create-extension": "./lib/parser/visitors/clause/create-extension/create-extension.js",
+    "#parser/clause/create-schema": "./lib/parser/visitors/clause/create-schema/create-schema.js",
+    "#parser/clause/grant": "./lib/parser/visitors/clause/grant/grant.js"
   },
   "scripts": {
     "test": "madrun test",
