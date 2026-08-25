@@ -1,0 +1,1 @@
+INSERT INTO t AS x (a) VALUES (1)

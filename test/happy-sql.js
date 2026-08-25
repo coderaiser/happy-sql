@@ -2047,3 +2047,36 @@ test('happy-sql: round-trip: join using', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: insert no columns', (t) => {
+    const source = 'INSERT INTO t VALUES (1, 2)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: insert default values', (t) => {
+    const source = 'INSERT INTO t DEFAULT VALUES';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: insert table alias', (t) => {
+    const source = 'INSERT INTO t AS x (a) VALUES (1)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
