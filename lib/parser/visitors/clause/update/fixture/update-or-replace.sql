@@ -1,0 +1,1 @@
+UPDATE OR REPLACE t SET x = 1 WHERE id = 1

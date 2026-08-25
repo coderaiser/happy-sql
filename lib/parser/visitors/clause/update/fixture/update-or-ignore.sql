@@ -1,0 +1,1 @@
+UPDATE OR IGNORE t SET x = 1

@@ -1546,3 +1546,32 @@ test('happy-sql: roundtrip: drop index if exists', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: update or replace', (t) => {
+    const source = montag`
+        UPDATE OR REPLACE t
+        SET x = 1
+        WHERE id = 1
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: update or ignore', (t) => {
+    const source = montag`
+        UPDATE OR IGNORE t
+        SET x = 1
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
