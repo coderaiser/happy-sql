@@ -1198,6 +1198,22 @@ test('happy-sql: roundtrip: create table as', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: where isnull postfix', (t) => {
+    const result = convertJsToSql(convertSqlToJs(`SELECT *\nFROM t\nWHERE id ISNULL`));
+    const expected = `SELECT *\nFROM t\nWHERE id IS NULL\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: where notnull postfix', (t) => {
+    const result = convertJsToSql(convertSqlToJs(`SELECT *\nFROM t\nWHERE id NOTNULL`));
+    const expected = `SELECT *\nFROM t\nWHERE id IS NOT NULL\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb
