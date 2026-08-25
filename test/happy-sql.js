@@ -1132,9 +1132,36 @@ test('happy-sql: roundtrip: where and with nested or parens', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: concat nested', (t) => {
+    const source = montag`
+        SELECT first_name || ' ' || last_name
+        FROM t
+    `;
+    
+    const result = convertJsToSql(convertSqlToJs(source));
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: pg cast operator double colon', (t) => {
+    const source = montag`
+        SELECT id::TEXT
         FROM t
     `;
     
