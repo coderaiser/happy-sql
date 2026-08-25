@@ -1,0 +1,4 @@
+CREATE TABLE t (
+a INT,
+b INT,
+PRIMARY KEY (a, b))

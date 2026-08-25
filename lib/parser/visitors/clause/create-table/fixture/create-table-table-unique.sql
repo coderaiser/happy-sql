@@ -1,0 +1,1 @@
+CREATE TABLE t (a INT, UNIQUE (a))

@@ -2080,3 +2080,46 @@ test('happy-sql: round-trip: insert table alias', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: create table primary key constraint', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        a INT,
+        b INT,
+        PRIMARY KEY (a, b))
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT,\nb INT,\nPRIMARY KEY (a, b))\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: create table unique constraint', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        a INT,
+        UNIQUE (a))
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT,\nUNIQUE (a))\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: create table named constraint', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        a INT,
+        CONSTRAINT pk PRIMARY KEY (a))
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT,\nCONSTRAINT pk PRIMARY KEY (a))\n');
+    t.end();
+});
