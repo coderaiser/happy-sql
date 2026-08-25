@@ -2032,3 +2032,18 @@ test('happy-sql: round-trip: pragma string arg', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: join using', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t1
+        JOIN t2 USING (id)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
