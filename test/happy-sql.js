@@ -1533,3 +1533,16 @@ test('happy-sql: roundtrip: create index where', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: drop index if exists', (t) => {
+    const source = montag`
+        DROP INDEX IF EXISTS idx
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
