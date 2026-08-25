@@ -1073,6 +1073,7 @@ const jsonRoundTripCases = [
     ['has-key', `SELECT *\nFROM users\nWHERE data ? 'email'`],
     ['contains', `SELECT *\nFROM users\nWHERE data @> '{"name":"x"}'`],
     ['has-any-key', `SELECT *\nFROM users\nWHERE data ?| ARRAY['email', 'name']`],
+    ['key-exists', `SELECT *\nFROM users\nWHERE data ?? 'email'`],
 ];
 
 for (const [name, sql] of jsonRoundTripCases)
