@@ -1,0 +1,3 @@
+SELECT id, SUM(x) OVER w
+FROM t
+WINDOW w AS (ORDER BY id)

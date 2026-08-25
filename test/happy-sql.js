@@ -1177,6 +1177,14 @@ test('happy-sql: roundtrip: truncate multi', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: named window', (t) => {
+    const result = convertJsToSql(convertSqlToJs(`SELECT ID, SUM(x) OVER w\nFROM t\nWINDOW w AS (ORDER BY id)`));
+    const expected = `SELECT ID, SUM(x) OVER w\nFROM t\nWINDOW w AS (ORDER BY id)\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: values standalone', (t) => {
     const result = convertJsToSql(convertSqlToJs(`VALUES (1, 'a'), (2, 'b')`));
     const expected = `VALUES (1, 'a'), (2, 'b')\n`;
