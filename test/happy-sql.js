@@ -1161,6 +1161,22 @@ test('happy-sql: roundtrip: distinct on', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: truncate', (t) => {
+    const result = convertJsToSql(convertSqlToJs('TRUNCATE TABLE t'));
+    const expected = 'TRUNCATE TABLE t\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: truncate multi', (t) => {
+    const result = convertJsToSql(convertSqlToJs('TRUNCATE TABLE a, b'));
+    const expected = 'TRUNCATE TABLE a, b\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb
