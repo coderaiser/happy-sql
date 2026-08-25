@@ -1,0 +1,2 @@
+CREATE INDEX idx ON t (name)
+WHERE x IS NULL

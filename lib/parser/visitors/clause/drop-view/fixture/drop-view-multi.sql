@@ -1,0 +1,2 @@
+DROP VIEW v1, v2
+

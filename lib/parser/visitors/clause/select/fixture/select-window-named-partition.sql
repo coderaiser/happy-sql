@@ -1,0 +1,2 @@
+SELECT id FROM t WINDOW w AS (PARTITION BY kind ORDER BY id)
+

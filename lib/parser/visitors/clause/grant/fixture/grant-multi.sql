@@ -1,0 +1,2 @@
+GRANT SELECT, INSERT ON t1, t2 TO u1, u2
+
