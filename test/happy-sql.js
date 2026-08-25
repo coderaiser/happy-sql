@@ -1828,3 +1828,17 @@ test('happy-sql: round-trip: REINDEX users', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: UNNEST with alias', (t) => {
+    const source = montag`
+        SELECT *
+        FROM UNNEST(ARRAY[1, 2, 3]) AS t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

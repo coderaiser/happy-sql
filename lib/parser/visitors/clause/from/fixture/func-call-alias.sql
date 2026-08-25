@@ -1,0 +1,2 @@
+SELECT * FROM UNNEST(ARRAY[1, 2, 3]) AS t
+
