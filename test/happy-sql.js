@@ -1493,3 +1493,43 @@ test('happy-sql: roundtrip: with cte', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create index if not exists', (t) => {
+    const source = montag`
+        CREATE INDEX IF NOT EXISTS idx ON t (name)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create index concurrently', (t) => {
+    const source = montag`
+        CREATE INDEX CONCURRENTLY idx ON t (name)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create index where', (t) => {
+    const source = montag`
+        CREATE INDEX idx ON t (name)
+        WHERE active = TRUE
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
