@@ -1145,6 +1145,14 @@ test('happy-sql: roundtrip: concat nested', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: filter where', (t) => {
+    const result = convertJsToSql(convertSqlToJs(`SELECT COUNT(*) FILTER (WHERE active = TRUE)\nFROM t`));
+    const expected = `SELECT COUNT(*) FILTER (WHERE active = TRUE)\nFROM t\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb
