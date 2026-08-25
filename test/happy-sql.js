@@ -1750,3 +1750,16 @@ test('happy-sql: roundtrip: not indexed', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create virtual table', (t) => {
+    const source = montag`
+        CREATE VIRTUAL TABLE ft USING fts5(content)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
