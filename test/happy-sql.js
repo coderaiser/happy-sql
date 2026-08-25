@@ -1802,3 +1802,29 @@ test('happy-sql: roundtrip: release savepoint', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: ANALYZE users', (t) => {
+    const source = montag`
+        ANALYZE users
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: REINDEX users', (t) => {
+    const source = montag`
+        REINDEX users
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
