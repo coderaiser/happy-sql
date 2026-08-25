@@ -1988,3 +1988,47 @@ test('happy-sql: round-trip: select quoted identifier', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: pragma no args', (t) => {
+    const source = 'PRAGMA user_version';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: pragma value', (t) => {
+    const source = 'PRAGMA foreign_keys = ON';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: pragma qualified', (t) => {
+    const source = 'PRAGMA schema.user_version';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: pragma string arg', (t) => {
+    const source = `PRAGMA table_info('t')`;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
