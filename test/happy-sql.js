@@ -1153,6 +1153,14 @@ test('happy-sql: roundtrip: filter where', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: distinct on', (t) => {
+    const result = convertJsToSql(convertSqlToJs(`SELECT DISTINCT ON (kind) id\nFROM t`));
+    const expected = `SELECT DISTINCT ON (kind) id\nFROM t\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb

@@ -1,0 +1,1 @@
+SELECT DISTINCT ON (kind) id FROM t
