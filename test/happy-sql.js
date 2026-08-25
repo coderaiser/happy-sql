@@ -1185,6 +1185,14 @@ test('happy-sql: roundtrip: named window', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: detach database', (t) => {
+    const result = convertJsToSql(convertSqlToJs('DETACH DATABASE other'));
+    const expected = 'DETACH DATABASE other\n';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: values standalone', (t) => {
     const result = convertJsToSql(convertSqlToJs(`VALUES (1, 'a'), (2, 'b')`));
     const expected = `VALUES (1, 'a'), (2, 'b')\n`;
