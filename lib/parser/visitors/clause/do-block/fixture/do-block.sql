@@ -1,0 +1,2 @@
+DO $$ BEGIN NULL; END $$
+
