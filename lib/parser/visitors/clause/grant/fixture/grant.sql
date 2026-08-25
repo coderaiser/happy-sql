@@ -1,0 +1,2 @@
+GRANT SELECT ON t TO user1
+
