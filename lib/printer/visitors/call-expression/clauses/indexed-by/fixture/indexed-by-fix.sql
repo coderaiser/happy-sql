@@ -1,0 +1,2 @@
+SELECT *
+FROM t INDEXED BY idx

@@ -1722,3 +1722,31 @@ test('happy-sql: roundtrip: grant', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: indexed by', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t INDEXED BY idx
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: not indexed', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t NOT INDEXED
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
