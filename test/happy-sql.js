@@ -1855,3 +1855,136 @@ test('happy-sql: round-trip: DO block', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: select arithmetic', (t) => {
+    const source = montag`
+        SELECT a + b * c
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select unary minus', (t) => {
+    const source = montag`
+        SELECT -a
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select not', (t) => {
+    const source = montag`
+        SELECT NOT c
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select between', (t) => {
+    const source = montag`
+        SELECT a BETWEEN 1 AND 5
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select exists column', (t) => {
+    const source = 'SELECT EXISTS (SELECT 1)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select scalar subquery', (t) => {
+    const source = `SELECT (SELECT max(x) FROM u) AS m`;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT (SELECT MAX(x)\nFROM u) AS m\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: select array cast', (t) => {
+    const source = montag`
+        SELECT a::int[]
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select subscript', (t) => {
+    const source = montag`
+        SELECT arr[1]
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select qualified table', (t) => {
+    const source = montag`
+        SELECT a
+        FROM s.t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: select quoted identifier', (t) => {
+    const source = montag`
+        SELECT "weird col"
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});

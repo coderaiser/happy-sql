@@ -1,0 +1,1 @@
+SELECT a::int[] FROM t

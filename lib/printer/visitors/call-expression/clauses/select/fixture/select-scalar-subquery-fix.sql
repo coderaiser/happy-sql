@@ -1,0 +1,2 @@
+SELECT (SELECT MAX(x)
+FROM u) AS m

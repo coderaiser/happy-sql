@@ -1,0 +1,2 @@
+SELECT arr[1]
+FROM t

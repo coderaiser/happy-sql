@@ -1,0 +1,2 @@
+SELECT NOT c
+FROM t
