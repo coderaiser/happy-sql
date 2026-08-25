@@ -1696,3 +1696,16 @@ test('happy-sql: roundtrip: create extension', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create schema', (t) => {
+    const source = montag`
+        CREATE SCHEMA myschema
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
