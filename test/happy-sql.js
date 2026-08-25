@@ -1185,6 +1185,19 @@ test('happy-sql: roundtrip: values standalone', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: create table as', (t) => {
+    const source = montag`
+        CREATE TABLE t2 AS SELECT *
+        FROM t1
+    `;
+    
+    const result = convertJsToSql(convertSqlToJs(source));
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: jsonb contains with pg cast', (t) => {
     const source = montag`
         SELECT data @> '{}'::jsonb
