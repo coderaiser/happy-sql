@@ -2178,3 +2178,48 @@ test('happy-sql: round-trip: alter table disable rls', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: order by ordinal', (t) => {
+    const source = montag`
+        SELECT x
+        FROM t
+        ORDER BY 2
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: order by nulls first', (t) => {
+    const source = montag`
+        SELECT a
+        FROM t
+        ORDER BY a NULLS FIRST
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: order by desc nulls last', (t) => {
+    const source = montag`
+        SELECT a
+        FROM t
+        ORDER BY a DESC NULLS LAST
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
