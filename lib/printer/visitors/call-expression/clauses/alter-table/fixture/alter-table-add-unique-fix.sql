@@ -1,0 +1,2 @@
+ALTER TABLE t
+UNIQUE (a)

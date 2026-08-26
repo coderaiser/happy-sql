@@ -2123,3 +2123,58 @@ test('happy-sql: round-trip: create table named constraint', (t) => {
     t.equal(result, 'CREATE TABLE t (\na INT,\nCONSTRAINT pk PRIMARY KEY (a))\n');
     t.end();
 });
+
+test('happy-sql: round-trip: alter table rename', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        RENAME TO u
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: alter table add constraint', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        ADD CONSTRAINT c UNIQUE (a)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'ALTER TABLE t\nCONSTRAINT c UNIQUE (a)\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: alter table enable rls', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        ENABLE ROW LEVEL SECURITY
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: alter table disable rls', (t) => {
+    const source = montag`
+        ALTER TABLE t
+        DISABLE ROW LEVEL SECURITY
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
