@@ -2300,3 +2300,30 @@ test('happy-sql: round-trip: count distinct', (t) => {
     t.equal(result, 'SELECT COUNT(DISTINCT a)\nFROM t\n');
     t.end();
 });
+
+test('happy-sql: round-trip: generated always as', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        a INT GENERATED ALWAYS AS (b + 1) STORED)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT GENERATED ALWAYS AS (b + 1) STORED)\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: over window frame', (t) => {
+    const source = montag`
+        SELECT COUNT(*)
+        OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT COUNT(*) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)\nFROM t\n');
+    t.end();
+});
