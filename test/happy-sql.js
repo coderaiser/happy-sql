@@ -2327,3 +2327,25 @@ test('happy-sql: round-trip: over window frame', (t) => {
     t.equal(result, 'SELECT COUNT(*) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)\nFROM t\n');
     t.end();
 });
+
+test('happy-sql: round-trip: create index desc', (t) => {
+    const source = 'CREATE INDEX idx ON t (a DESC, b)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: create index using method', (t) => {
+    const source = 'CREATE INDEX idx ON t USING btree (a)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
