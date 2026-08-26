@@ -1,0 +1,2 @@
+UPDATE OR ABORT t
+SET a = 1

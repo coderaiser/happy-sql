@@ -1,0 +1,2 @@
+UPDATE OR FAIL t
+SET a = 1

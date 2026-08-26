@@ -2223,3 +2223,31 @@ test('happy-sql: round-trip: order by desc nulls last', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: update or abort', (t) => {
+    const source = montag`
+        UPDATE OR ABORT t
+        SET a = 1
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: update or fail', (t) => {
+    const source = montag`
+        UPDATE OR FAIL t
+        SET a = 1
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
