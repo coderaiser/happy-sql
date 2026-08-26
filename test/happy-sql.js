@@ -2251,3 +2251,14 @@ test('happy-sql: round-trip: update or fail', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: analyze qualified table', (t) => {
+    const source = 'ANALYZE schema.t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
