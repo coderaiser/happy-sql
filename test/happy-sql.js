@@ -2279,11 +2279,24 @@ test('happy-sql: round-trip: like escape', (t) => {
 });
 
 test('happy-sql: round-trip: like escape backslash', (t) => {
-    const source = 'SELECT a\nFROM t\n' + String.raw`WHERE b LIKE 'x%' ESCAPE ''` + '\n';
+    const source = 'SELECT a\nFROM t\n' + `WHERE b LIKE 'x%' ESCAPE '${String.fromCharCode(92)}'` + '\n';
     
     const ast = parseSql(source);
     const result = printSql(ast);
     
     t.equal(result, source);
+    t.end();
+});
+
+test('happy-sql: round-trip: count distinct', (t) => {
+    const source = montag`
+        SELECT count(DISTINCT a)
+        FROM t
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT COUNT(DISTINCT a)\nFROM t\n');
     t.end();
 });

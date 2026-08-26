@@ -1,0 +1,2 @@
+SELECT count(DISTINCT a)
+FROM t
