@@ -2373,3 +2373,33 @@ test('happy-sql: round-trip: references actions', (t) => {
     t.equal(result, 'CREATE TABLE t (\nd INT REFERENCES u(id ON DELETE CASCADE))\n');
     t.end();
 });
+
+test('happy-sql: round-trip: create temp table', (t) => {
+    const source = 'CREATE TEMP TABLE t (a INT)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TEMP TABLE t (\na INT)\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: create temp table if not exists', (t) => {
+    const source = 'CREATE TEMP TABLE IF NOT EXISTS t (a INT)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TEMP TABLE IF NOT EXISTS t (\na INT)\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: create table without rowid', (t) => {
+    const source = 'CREATE TABLE t (a INT) WITHOUT ROWID';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT) WITHOUT ROWID\n');
+    t.end();
+});

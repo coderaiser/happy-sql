@@ -1,0 +1,2 @@
+CREATE TEMP TABLE t (
+a INT)
