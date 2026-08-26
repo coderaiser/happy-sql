@@ -2262,3 +2262,28 @@ test('happy-sql: round-trip: analyze qualified table', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: like escape', (t) => {
+    const source = montag`
+        SELECT a
+        FROM t
+        WHERE b LIKE 'x%' ESCAPE '!'
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: like escape backslash', (t) => {
+    const source = 'SELECT a\nFROM t\n' + String.raw`WHERE b LIKE 'x%' ESCAPE ''` + '\n';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, source);
+    t.end();
+});
