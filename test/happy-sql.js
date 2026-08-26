@@ -2349,3 +2349,14 @@ test('happy-sql: round-trip: create index using method', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: drop view if exists', (t) => {
+    const source = 'DROP VIEW IF EXISTS v';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
