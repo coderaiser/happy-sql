@@ -2360,3 +2360,16 @@ test('happy-sql: round-trip: drop view if exists', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: round-trip: references actions', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        d INT REFERENCES u (id) ON DELETE CASCADE)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\nd INT REFERENCES u(id ON DELETE CASCADE))\n');
+    t.end();
+});
