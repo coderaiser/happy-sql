@@ -1,0 +1,2 @@
+INSERT INTO t (x) VALUES (:x)
+ON CONFLICT (x) WHERE y > 0 DO UPDATE SET x = :x

@@ -2403,3 +2403,102 @@ test('happy-sql: round-trip: create table without rowid', (t) => {
     t.equal(result, 'CREATE TABLE t (\na INT) WITHOUT ROWID\n');
     t.end();
 });
+
+test('happy-sql: round-trip: explain query plan', (t) => {
+    const source = 'EXPLAIN QUERY PLAN SELECT * FROM t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'EXPLAIN QUERY PLAN SELECT *\nFROM t\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: on conflict where', (t) => {
+    const source = 'INSERT INTO t (a) VALUES (1) ON CONFLICT (a) WHERE b > 0 DO UPDATE SET a = EXCLUDED.a';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'INSERT INTO t (a) VALUES (1)\nON CONFLICT (a) WHERE b > 0 DO UPDATE SET a = EXCLUDED.a\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: select nextval', (t) => {
+    const source = `SELECT nextval('seq')`;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: collate', (t) => {
+    const source = 'SELECT a COLLATE nocase FROM t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT a COLLATE nocase\nFROM t\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: limit all', (t) => {
+    const source = 'SELECT 1 LIMIT ALL';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT 1\nLIMIT ALL\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: offset', (t) => {
+    const source = 'SELECT 1 OFFSET 3';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT 1\nOFFSET 3\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: fetch first', (t) => {
+    const source = 'SELECT * FROM t LIMIT 5 FETCH FIRST 3 ROWS ONLY';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT *\nFROM t\nLIMIT 5\nFETCH FIRST 3 ROWS ONLY\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: right outer join', (t) => {
+    const source = 'SELECT * FROM t1 RIGHT OUTER JOIN t2 ON t1.a = t2.a';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT *\nFROM t1\nRIGHT OUTER JOIN t2 ON t1.a = t2.a\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: escape single quotes in string literal', (t) => {
+    const ast = parseSql(`SELECT 'it''s' AS s FROM t`);
+    const result = printSql(ast);
+    
+    t.equal(result, `SELECT 'it''s' AS s\nFROM t\n`);
+    t.end();
+});
+
+test('happy-sql: round-trip: for update', (t) => {
+    const source = 'SELECT * FROM t FOR UPDATE';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT *\nFROM t\nFOR UPDATE\n');
+    t.end();
+});

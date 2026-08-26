@@ -1,0 +1,2 @@
+SELECT a COLLATE nocase
+FROM t
