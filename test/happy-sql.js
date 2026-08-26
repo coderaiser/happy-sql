@@ -2426,6 +2426,13 @@ test('happy-sql: round-trip: on conflict where', (t) => {
 
 test('happy-sql: round-trip: select nextval', (t) => {
     const source = `SELECT nextval('seq')`;
+=======
+test('happy-sql: round-trip: join using multi columns', (t) => {
+    const source = montag`
+        SELECT *
+        FROM t1
+        JOIN t2 USING (a, b)
+    `;
     
     const ast = parseSql(source);
     const result = printSql(ast);
@@ -2502,3 +2509,5 @@ test('happy-sql: round-trip: for update', (t) => {
     t.equal(result, 'SELECT *\nFROM t\nFOR UPDATE\n');
     t.end();
 });
+=======
+>>>>>>> d80d9329 (feature: USING)
