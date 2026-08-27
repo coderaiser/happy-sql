@@ -1,3 +1,63 @@
+2026.08.27, v2.4.0
+
+fix:
+- 044050d nextval: scope DEFAULT nextval conversion to column defaults
+- 6f9d707 from: rightOuterJoin missing from printer imports
+- ba06223 over: window frame ROWS BETWEEN support
+- 6c35624 create-table: TEMP keyword and WITHOUT ROWID
+- 038cac6 references: ON DELETE and ON UPDATE actions
+- 6cd9a75 drop-view: IF EXISTS support
+- d5bd976 create-index: column sort order and index method
+- 1a6dc5f over: window frame ROWS BETWEEN support
+- e8c9ba6 column-definition: GENERATED ALWAYS AS expression
+- dbaea87 count: preserve DISTINCT modifier
+- 5d9ce53 like: ESCAPE clause support
+- e8322bc analyze: qualified table names
+- d0446af update: SQLite OR ABORT and OR FAIL
+- 1ffd47d order-by: ordinals and NULLS FIRST/LAST
+- 48c9aed alter-table: rename table, add constraint, RLS actions
+- 297b46a create-table: table-level primary key and unique constraints
+- 8f3d71f insert: optional column list, DEFAULT VALUES, table alias
+- 1609515 from: JOIN USING support
+- 4c0bc85 pragma: support get/set/qualified/string forms
+- 3ed2c4f select: support full expression set in select columns
+- 44bf5d7 happy-sql: from: UNNEST and func_call alias support
+- fedfc86 happy-sql: ANALYZE and REINDEX preserve table name
+- fbb7ce6 from: SQLite INDEXED BY and NOT INDEXED table hints
+- 923c7bb vacuum: VACUUM INTO file support
+- d00c4d2 update: SQLite OR REPLACE and OR IGNORE
+- 196eae8 drop-index: IF EXISTS support
+- 0cf9caf create-index: IF NOT EXISTS, CONCURRENTLY, WHERE partial index
+- 15cf3bb with-named: remove extra indentation from CTE body
+- 018e921 lateral-join: alias without AS for subquery
+- e3f4ae8 detach database statement
+- c070d03 window: named WINDOW clause
+- 9792a5e from: subquery alias without AS keyword
+- 4868889 where: ISNULL/NOTNULL postfix
+- 3bea77a create-table: AS SELECT form
+- d5ff74b values: standalone VALUES statement
+- 6f27346 truncate: add statement
+- 5a07d99 select: DISTINCT ON
+- 964f8e6 func-call: FILTER (WHERE ...)
+- 407ff5e binary-expression: || concat
+- ed2b211 operand: :: cast_operator_expr
+- b08cc9f binary-expression: ?? → ?
+
+feature:
+- 3fff1e3 happy-sql: putout_processor_sql
+- 97f890f USING
+- 8ccaa46 RIGHT OUTER JOIN
+- 29a5510 happy-sql: DO block
+- a18ac59 reindex, analyze, release-savepoint: add trivial statement types
+- f0fef07 create-virtual-table: SQLite CREATE VIRTUAL TABLE USING
+- dfe2b2c grant: GRANT privilege ON table TO role
+- 2a29916 create-schema: CREATE SCHEMA
+- f272f3b create-extension: CREATE EXTENSION
+- cd61021 drop-view: DROP VIEW
+- aef8f2a create-view: CREATE VIEW and CREATE MATERIALIZED VIEW
+- d2585b8 set-param: SET and SHOW parameter statements
+- 0e734a4 explain: EXPLAIN and EXPLAIN ANALYZE
+
 2026.08.24, v2.3.0
 
 fix:
