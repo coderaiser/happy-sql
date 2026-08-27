@@ -2426,7 +2426,15 @@ test('happy-sql: round-trip: on conflict where', (t) => {
 
 test('happy-sql: round-trip: select nextval', (t) => {
     const source = `SELECT nextval('seq')`;
-=======
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: round-trip: join using multi columns', (t) => {
     const source = montag`
         SELECT *
@@ -2509,5 +2517,74 @@ test('happy-sql: round-trip: for update', (t) => {
     t.equal(result, 'SELECT *\nFROM t\nFOR UPDATE\n');
     t.end();
 });
-=======
->>>>>>> d80d9329 (feature: USING)
+
+test('happy-sql: round-trip: from with offset clause', (t) => {
+    const source = 'SELECT * FROM t OFFSET 3';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT *\nFROM t\nOFFSET 3\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: fetch first without from', (t) => {
+    const source = 'SELECT 1 FETCH FIRST 3 ROWS ONLY';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT 1\nFETCH FIRST 3 ROWS ONLY\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: for update without from', (t) => {
+    const source = 'SELECT 1 FOR UPDATE';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT 1\nFOR UPDATE\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: count distinct multi args', (t) => {
+    const source = 'SELECT count(DISTINCT a, b) FROM t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT COUNT(DISTINCT a, b)\nFROM t\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: table unique multi columns', (t) => {
+    const source = 'CREATE TABLE t (a INT, b INT, UNIQUE (a, b))';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\na INT,\nb INT,\nUNIQUE (a, b))\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: over window frame unbounded preceding', (t) => {
+    const source = 'SELECT count(*) OVER (ORDER BY id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) FROM t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT COUNT(*) OVER (ORDER BY id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)\nFROM t\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: over window frame unbounded following', (t) => {
+    const source = 'SELECT count(*) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND UNBOUNDED FOLLOWING) FROM t';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'SELECT COUNT(*) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND UNBOUNDED FOLLOWING)\nFROM t\n');
+    t.end();
+});
+

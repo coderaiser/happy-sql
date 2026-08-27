@@ -1,0 +1,3 @@
+SELECT *
+FROM t1
+JOIN t2 USING (a, b)
