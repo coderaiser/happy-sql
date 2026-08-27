@@ -2588,3 +2588,33 @@ test('happy-sql: round-trip: over window frame unbounded following', (t) => {
     t.end();
 });
 
+test('happy-sql: round-trip: select nextval identifier arg', (t) => {
+    const source = 'SELECT nextval(seqx)';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: round-trip: column default nextval', (t) => {
+    const source = `CREATE TABLE users (id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY, name TEXT)`;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, `CREATE TABLE users (\nid INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY,\nname TEXT)\n`);
+    t.end();
+});
+
+test('happy-sql: round-trip: column default nextval identifier arg', (t) => {
+    const source = 'CREATE TABLE u (id INT DEFAULT nextval(s))';
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, `CREATE TABLE u (\nid INT DEFAULT nextval('s'))\n`);
+    t.end();
+});
