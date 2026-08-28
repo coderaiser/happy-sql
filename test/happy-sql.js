@@ -2370,7 +2370,20 @@ test('happy-sql: round-trip: references actions', (t) => {
     const ast = parseSql(source);
     const result = printSql(ast);
     
-    t.equal(result, 'CREATE TABLE t (\nd INT REFERENCES u(id ON DELETE CASCADE))\n');
+    t.equal(result, 'CREATE TABLE t (\nd INT REFERENCES u(id) ON DELETE CASCADE)\n');
+    t.end();
+});
+
+test('happy-sql: round-trip: references on update', (t) => {
+    const source = montag`
+        CREATE TABLE t (
+        d INT REFERENCES u (id) ON UPDATE RESTRICT)
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    
+    t.equal(result, 'CREATE TABLE t (\nd INT REFERENCES u(id) ON UPDATE RESTRICT)\n');
     t.end();
 });
 
