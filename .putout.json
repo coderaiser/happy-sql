@@ -1,7 +1,9 @@
 {
     "rules": {
         "printer": "on",
-        "putout": "on"
+        "putout": "on",
+        "optional-chaining/convert-logical-to-optional": "off",
+        "logical-expressions/simplify": "off"
     },
     "match": {
         "example": {
