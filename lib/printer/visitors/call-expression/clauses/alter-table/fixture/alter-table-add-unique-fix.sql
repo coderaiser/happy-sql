@@ -1,2 +1,2 @@
 ALTER TABLE t
-UNIQUE (a)
+ADD UNIQUE (a)
