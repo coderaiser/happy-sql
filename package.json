@@ -83,7 +83,7 @@
   },
   "homepage": "https://github.com/coderaiser/happy-sql",
   "devDependencies": {
-    "@putout/plugin-printer": "^8.22.0",
+    "@putout/plugin-printer": "^9.0.0",
     "@putout/test": "^15.8.2",
     "eslint": "^10.8.1",
     "eslint-plugin-node": "^11.1.0",
