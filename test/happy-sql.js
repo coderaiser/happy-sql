@@ -563,6 +563,22 @@ test('happy-sql: roundtrip: left join', (t) => {
     t.end();
 });
 
+test('happy-sql: roundtrip: join: where', (t) => {
+    const source = montag`
+        SELECT a.id
+        FROM A AS a
+        JOIN B AS b ON b.x = a.id
+        WHERE a.file = :file
+        AND b.k = 1
+    `;
+    
+    const result = convertJsToSql(convertSqlToJs(source));
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('happy-sql: roundtrip: inner join', (t) => {
     const source = montag`
         SELECT *

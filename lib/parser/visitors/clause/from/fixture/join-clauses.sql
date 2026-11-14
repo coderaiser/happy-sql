@@ -1,0 +1,8 @@
+SELECT a.id
+FROM A a
+LEFT JOIN B b ON b.x = a.id
+WHERE a.k = 1
+GROUP BY a.id
+HAVING COUNT(*) > 1
+ORDER BY a.id
+LIMIT 10
