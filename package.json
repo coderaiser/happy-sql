@@ -103,7 +103,7 @@
     "@putout/printer": "^18.38.1",
     "just-camel-case": "^6.2.0",
     "redstd": "^1.0.2",
-    "sql-parser-cst": "^0.42.1",
+    "sql-parser-cst": "^0.44.1",
     "try-catch": "^4.0.9"
   }
 }
