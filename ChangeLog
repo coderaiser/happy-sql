@@ -1,3 +1,31 @@
+2026.11.14, v2.4.1
+
+fix:
+- 10d5818 happy-sql: join
+- 7510903 alter-table: rename table, add constraint, RLS actions
+- a4e14a1 references: ON DELETE and ON UPDATE actions
+- 60cbd74 from: extract capitalizeWord, remove inlined arrow
+- 3ebbea9 with-named: extract convertColumn, remove inlined arrow
+- 8848396 printer/from: remove inlined arrows and ternary
+- 0cc326c window-frame: remove optional chaining
+- 652387a references: remove optional chaining
+- 344f7c3 clause/index: remove optional chaining, nullish coalescing, inlined arrows
+- 313fa5f binary: remove optional chaining and nullish coalescing
+- 12b6f3c insert: remove optional chaining and inlined arrows/ternaries
+- 652bcad create-index: remove optional chaining
+- b5b40ac limit: remove optional chaining
+- 5eb1732 create-table: remove optional chaining and inlined arrows
+- f078532 create-view: extract isMaterializedKind predicate
+- 472e627 order-by: extract nulls order fn name
+- ddcb389 group-by: remove inlined arrow in map
+- 1be75b4 table-func: extract getRawName, remove inlined ternary
+- 10a0b35 column-definition: remove optional chaining, nullish coalescing, inlined arrows
+- 9108d3e operand: remove optional chaining and nullish coalescing
+
+feature:
+- ffaef07 happy-sql: sql-parser-cst v0.44.1
+- 981cf13 happy-sql: @putout/plugin-printer v9.0.0
+
 2026.08.27, v2.4.0
 
 fix:
