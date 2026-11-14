@@ -2159,10 +2159,10 @@ test('happy-sql: round-trip: alter table add constraint', (t) => {
         ALTER TABLE t
         ADD CONSTRAINT c UNIQUE (a)
     `;
-
+    
     const ast = parseSql(source);
     const result = printSql(ast);
-
+    
     t.equal(result, 'ALTER TABLE t\nADD CONSTRAINT c UNIQUE (a)\n');
     t.end();
 });

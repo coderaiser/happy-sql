@@ -1,5 +1,6 @@
 {
     "rules": {
+        "check-types": "on",
         "printer": "on",
         "putout": "on",
         "optional-chaining/convert-logical-to-optional": "off",
