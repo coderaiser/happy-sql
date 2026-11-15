@@ -1,0 +1,3 @@
+SELECT id
+FROM t
+WHERE a = 1 AND (b = 2 OR c = 3)

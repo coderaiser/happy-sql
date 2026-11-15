@@ -1,0 +1,3 @@
+SELECT id
+FROM t
+WHERE a IS NOT 1
