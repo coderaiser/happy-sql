@@ -1,3 +1,9 @@
+2026.11.15, v2.5.0
+
+feature:
+- 1c961c1 happy-sql: apply type checker
+- a4f7d90 happy-sql: where: keep parentheses in nested expressions
+
 2026.11.14, v2.4.1
 
 fix:
