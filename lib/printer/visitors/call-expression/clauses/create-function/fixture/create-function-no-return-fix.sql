@@ -1,0 +1,9 @@
+CREATE FUNCTION t_fn()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM x
+    WHERE y = OLD.id;
+END;
+$$

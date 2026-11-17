@@ -43,6 +43,7 @@
     "#printer/test": "./test/create-printer-test.js",
     "#parser/clause/explain": "./lib/parser/visitors/clause/explain/explain.js",
     "#parser/clause/set-param": "./lib/parser/visitors/clause/set-param/set-param.js",
+    "#parser/clause/create-function": "./lib/parser/visitors/clause/create-function/create-function.js",
     "#parser/clause/create-trigger": "./lib/parser/visitors/clause/create-trigger/create-trigger.js",
     "#parser/clause/create-view": "./lib/parser/visitors/clause/create-view/create-view.js",
     "#parser/clause/drop-view": "./lib/parser/visitors/clause/drop-view/drop-view.js",

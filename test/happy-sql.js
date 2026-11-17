@@ -2679,3 +2679,25 @@ test('happy-sql: roundtrip: create trigger: postgres', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create function', (t) => {
+    const source = montag`
+        CREATE OR REPLACE FUNCTION del_foo_fn()
+        RETURNS trigger
+        LANGUAGE plpgsql
+        AS $$
+        BEGIN
+            DELETE FROM comments
+            WHERE node_id = OLD.id;
+            RETURN OLD;
+        END;
+        $$
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
