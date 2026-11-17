@@ -1,3 +1,11 @@
+2026.11.17, v2.9.0
+
+fix:
+- 54c0378 happy-sql: printer: add ; between statements
+
+feature:
+- 45148fa happy-sql: create trigger: or replace, when in parens
+
 2026.11.17, v2.8.0
 
 feature:
