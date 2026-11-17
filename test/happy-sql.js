@@ -2652,8 +2652,8 @@ test('happy-sql: roundtrip: create trigger', (t) => {
     const source = montag`
         CREATE TRIGGER del_foo AFTER DELETE ON foo
         BEGIN
-        DELETE FROM comments
-        WHERE node_id = OLD.id;
+            DELETE FROM comments
+            WHERE node_id = OLD.id;
         END
     `;
     

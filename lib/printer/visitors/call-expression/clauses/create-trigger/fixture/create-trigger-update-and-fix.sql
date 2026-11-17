@@ -1,0 +1,7 @@
+CREATE TRIGGER t AFTER DELETE ON foo
+BEGIN
+    UPDATE x
+    SET a = 1
+    WHERE y = OLD.id
+    AND z = OLD.z;
+END
