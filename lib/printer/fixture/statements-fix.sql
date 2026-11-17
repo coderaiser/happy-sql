@@ -1,0 +1,3 @@
+DELETE FROM a;
+
+DELETE FROM b;
