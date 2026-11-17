@@ -2647,3 +2647,35 @@ test('happy-sql: round-trip: column default nextval identifier arg', (t) => {
     t.equal(result, `CREATE TABLE u (\nid INT DEFAULT nextval('s'))\n`);
     t.end();
 });
+
+test('happy-sql: roundtrip: create trigger', (t) => {
+    const source = montag`
+        CREATE TRIGGER del_foo AFTER DELETE ON foo
+        BEGIN
+        DELETE FROM comments
+        WHERE node_id = OLD.id;
+        END
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('happy-sql: roundtrip: create trigger: postgres', (t) => {
+    const source = montag`
+        CREATE TRIGGER del_foo AFTER DELETE ON foo
+        FOR EACH ROW
+        EXECUTE FUNCTION del_foo_fn()
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
