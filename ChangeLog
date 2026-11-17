@@ -1,3 +1,8 @@
+2026.11.17, v2.6.0
+
+feature:
+- b5fc1d2 happy-sql: create trigger
+
 2026.11.15, v2.5.0
 
 feature:
