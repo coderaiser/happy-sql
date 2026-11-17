@@ -2716,3 +2716,22 @@ test('happy-sql: roundtrip: several statements', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('happy-sql: roundtrip: create trigger: when', (t) => {
+    const source = montag`
+        CREATE TRIGGER del_foo AFTER DELETE ON foo
+        FOR EACH ROW
+        WHEN (OLD.a = 1)
+        BEGIN
+            DELETE FROM comments
+            WHERE node_id = OLD.id;
+        END
+    `;
+    
+    const ast = parseSql(source);
+    const result = printSql(ast);
+    const expected = `${source}\n`;
+    
+    t.equal(result, expected);
+    t.end();
+});
