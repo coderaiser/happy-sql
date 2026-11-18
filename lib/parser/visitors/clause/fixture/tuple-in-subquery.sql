@@ -1,0 +1,3 @@
+SELECT a
+FROM t
+WHERE (a, b) IN (SELECT c, d FROM u)
